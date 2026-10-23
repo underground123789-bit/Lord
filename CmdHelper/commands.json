@@ -1,0 +1,3337 @@
+[
+ {
+  "cat": "Basics",
+  "title": "Open CMD as Administrator",
+  "cmd": "",
+  "desc": "Press Start, type  cmd , right-click 'Command Prompt' > Run as administrator.\nShortcut: Win+R, type cmd, then press Ctrl+Shift+Enter.\nOr Win+X > Terminal (Admin).\nMany repair commands (sfc, DISM, netsh reset, chkdsk...) need this.",
+  "tags": [
+   "admin",
+   "administrator",
+   "elevated",
+   "run as",
+   "sla7iyet",
+   "sala7iyat"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Get help for any command",
+  "cmd": "<command> /?",
+  "desc": "Shows the built-in help and all options of any CMD command.",
+  "example": "dir /?\nrobocopy /?\nhelp            :: list of built-in commands",
+  "tags": [
+   "help",
+   "manual",
+   "options",
+   "syntax",
+   "mosa3de"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Clear the screen",
+  "cmd": "cls",
+  "desc": "Clears the CMD window.",
+  "tags": [
+   "clear",
+   "clean screen",
+   "empty"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Change folder (cd)",
+  "cmd": "cd <folder>",
+  "desc": "Moves into another folder. Use  cd ..  to go up one level and  cd /d  to change drive too.",
+  "example": "cd C:\\Users\ncd ..\ncd \\              :: go to the root of the drive\ncd /d D:\\Games    :: change drive + folder\nD:              :: just switch drive",
+  "tags": [
+   "change directory",
+   "folder",
+   "navigate",
+   "go to",
+   "path"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "List files in a folder (dir)",
+  "cmd": "dir",
+  "desc": "Lists files and folders. Useful options: /a shows hidden files, /s includes subfolders, /b bare names only, /o sorts.",
+  "example": "dir /a              :: include hidden & system files\ndir /s /b *.mp4     :: find all mp4 files in subfolders\ndir /o:-s           :: sort by size, biggest first\ndir /o:d            :: sort by date",
+  "tags": [
+   "list",
+   "files",
+   "show files",
+   "ls",
+   "hidden files"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Command history",
+  "cmd": "doskey /history",
+  "desc": "Shows commands typed in this window. Press F7 for a popup history list, Up/Down arrows to cycle, F3 repeats last command.",
+  "tags": [
+   "history",
+   "previous commands",
+   "f7",
+   "arrows"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Exit CMD",
+  "cmd": "exit",
+  "desc": "Closes the Command Prompt window (or ends a batch script).",
+  "tags": [
+   "close",
+   "quit"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Run a program / open a file",
+  "cmd": "start <program or file>",
+  "desc": "Opens a program, file, folder or website with its default app, in a new window.",
+  "example": "start notepad\nstart .                     :: open current folder in Explorer\nstart https://google.com\nstart \"\" \"C:\\My Folder\\file.pdf\"",
+  "tags": [
+   "open",
+   "launch",
+   "start program",
+   "explorer"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Show text / variable (echo)",
+  "cmd": "echo <text>",
+  "desc": "Prints text or a variable value.",
+  "example": "echo Hello\necho %USERNAME%\necho %PATH%\necho. > empty.txt      :: create empty file",
+  "tags": [
+   "print",
+   "echo",
+   "variable"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Save command output to a file",
+  "cmd": "<command> > output.txt",
+  "desc": ">  overwrites the file, >>  appends, 2>&1 also captures errors.",
+  "example": "ipconfig /all > C:\\net.txt\ndir >> list.txt\nmycommand > log.txt 2>&1",
+  "tags": [
+   "redirect",
+   "save output",
+   "export",
+   "log"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Copy command output to clipboard",
+  "cmd": "<command> | clip",
+  "desc": "Pipes the output into the clipboard so you can paste it anywhere.",
+  "example": "ipconfig | clip\ndir /b | clip",
+  "tags": [
+   "clipboard",
+   "copy output"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Filter output (find / findstr)",
+  "cmd": "<command> | findstr <text>",
+  "desc": "Shows only lines containing the text. /i = ignore case. findstr supports regular expressions.",
+  "example": "ipconfig | findstr IPv4\ntasklist | findstr /i chrome\nnetstat -ano | findstr :80",
+  "tags": [
+   "grep",
+   "filter",
+   "search output"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Run several commands in one line",
+  "cmd": "command1 & command2",
+  "desc": "&  runs both.  &&  runs the second only if the first succeeded.  ||  runs the second only if the first failed.",
+  "example": "ipconfig /release && ipconfig /renew\nmkdir test || echo folder already exists",
+  "tags": [
+   "chain",
+   "multiple commands",
+   "and"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Environment variables (set)",
+  "cmd": "set",
+  "desc": "Shows all variables. set NAME=value sets one for this window only. Use setx for permanent.",
+  "example": "set                  :: show all\nset PATH\nset MYVAR=hello\nsetx MYVAR \"hello\"    :: permanent (new windows)\necho %USERPROFILE% %APPDATA% %TEMP%",
+  "tags": [
+   "variable",
+   "env",
+   "environment",
+   "setx"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Add a folder to PATH (permanent)",
+  "cmd": "setx PATH \"%PATH%;C:\\MyTools\"",
+  "desc": "Adds a folder so programs in it can be run from anywhere. Open a NEW CMD after this.\nWarning: setx truncates values longer than 1024 chars. Safer: Win+R > sysdm.cpl > Advanced > Environment Variables > Path > Edit > New.",
+  "tags": [
+   "path",
+   "environment",
+   "not recognized",
+   "add to path"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Where is a program? (where)",
+  "cmd": "where <name>",
+  "desc": "Shows the full path of the program that runs when you type its name.",
+  "example": "where python\nwhere git\nwhere /r C:\\ notepad.exe   :: search the whole drive",
+  "tags": [
+   "which",
+   "location",
+   "find exe"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Change CMD colors / title",
+  "cmd": "color 0A",
+  "desc": "First digit = background, second = text (0 black, A green, F white...). title changes the window title.",
+  "example": "color 0A\ncolor 07          :: default\ntitle My Window",
+  "tags": [
+   "color",
+   "theme",
+   "title",
+   "hacker green"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Use UTF-8 / Arabic text in CMD",
+  "cmd": "chcp 65001",
+  "desc": "Switches the console code page to UTF-8 so Arabic and special characters display better. chcp alone shows the current code page.",
+  "tags": [
+   "arabic",
+   "utf8",
+   "encoding",
+   "weird characters",
+   "question marks",
+   "3arabe"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Pause / wait",
+  "cmd": "timeout /t 10",
+  "desc": "Waits 10 seconds (any key skips). /nobreak ignores keys. pause waits for a key.",
+  "example": "timeout /t 5 /nobreak\npause",
+  "tags": [
+   "wait",
+   "sleep",
+   "delay"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Date and time",
+  "cmd": "echo %date% %time%",
+  "desc": "Shows current date/time.  date  and  time  without /t let you change them (admin).",
+  "example": "date /t\ntime /t",
+  "tags": [
+   "date",
+   "time",
+   "clock"
+  ]
+ },
+ {
+  "cat": "Basics",
+  "title": "Who am I (current user)",
+  "cmd": "whoami",
+  "desc": "Shows current user. /priv shows privileges, /groups shows groups.",
+  "example": "whoami /all",
+  "tags": [
+   "user",
+   "username",
+   "current user"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Create a folder",
+  "cmd": "mkdir <name>",
+  "desc": "Creates a folder (md does the same). Creates parent folders too.",
+  "example": "mkdir Projects\nmkdir \"C:\\My Stuff\\2024\\Photos\"",
+  "tags": [
+   "make folder",
+   "new folder",
+   "md",
+   "create directory"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Delete a file",
+  "cmd": "del <file>",
+  "desc": "Deletes files. /f forces read-only files, /q no confirmation, /s also in subfolders. Deleted files do NOT go to the Recycle Bin.",
+  "example": "del file.txt\ndel /f /q *.tmp\ndel /s /q C:\\Temp\\*.log",
+  "tags": [
+   "delete",
+   "remove",
+   "erase",
+   "rm"
+  ],
+  "danger": true
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Delete a folder with everything inside",
+  "cmd": "rmdir /s /q <folder>",
+  "desc": "Deletes a folder and all its contents without asking. Cannot be undone!",
+  "example": "rmdir /s /q \"C:\\Old Folder\"",
+  "tags": [
+   "delete folder",
+   "remove directory",
+   "rd",
+   "rm -rf"
+  ],
+  "danger": true
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Copy files",
+  "cmd": "copy <source> <destination>",
+  "desc": "Copies one or more files.",
+  "example": "copy file.txt D:\\Backup\\\ncopy *.jpg D:\\Photos\\\ncopy a.txt+b.txt all.txt   :: join files",
+  "tags": [
+   "copy",
+   "duplicate"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Copy folders (xcopy)",
+  "cmd": "xcopy <source> <dest> /e /i /h /y",
+  "desc": "Copies folders with subfolders. /e include empty folders, /i dest is folder, /h hidden files, /y no overwrite prompt.",
+  "example": "xcopy \"C:\\Data\" \"D:\\Backup\\Data\" /e /i /h /y",
+  "tags": [
+   "copy folder",
+   "xcopy"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Copy / backup big folders (robocopy)",
+  "cmd": "robocopy <source> <dest> /e",
+  "desc": "The best copy tool: resumes, retries, copies only changed files.\n/e subfolders, /mir mirror (also DELETES extra files in dest!), /mt:16 multi-thread, /r:1 /w:1 fewer retries, /z restartable.",
+  "example": "robocopy \"C:\\Users\\Me\\Documents\" \"E:\\Backup\\Docs\" /e /mt:16 /r:1 /w:1\nrobocopy C:\\src D:\\dst /mir      :: exact mirror",
+  "tags": [
+   "backup",
+   "copy",
+   "sync",
+   "mirror",
+   "robocopy",
+   "fast copy"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Move files",
+  "cmd": "move <source> <destination>",
+  "desc": "Moves files or folders (also renames).",
+  "example": "move file.txt D:\\\nmove \"C:\\Old\" \"C:\\New\"",
+  "tags": [
+   "move",
+   "cut",
+   "paste"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Rename a file",
+  "cmd": "ren <old> <new>",
+  "desc": "Renames a file or folder. Wildcards work for extensions.",
+  "example": "ren photo.jpeg photo.jpg\nren *.txt *.bak",
+  "tags": [
+   "rename",
+   "change name",
+   "extension"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Show file contents",
+  "cmd": "type <file>",
+  "desc": "Prints a text file in CMD. Use  more  for page by page.",
+  "example": "type notes.txt\ntype big.log | more",
+  "tags": [
+   "read file",
+   "cat",
+   "show text"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Create a file",
+  "cmd": "echo text > file.txt",
+  "desc": "Creates a file with text.  type nul > file.txt  creates an empty file.",
+  "example": "type nul > empty.txt\necho hello > hello.txt\nnotepad new.txt",
+  "tags": [
+   "new file",
+   "create file",
+   "touch"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Folder tree",
+  "cmd": "tree /f",
+  "desc": "Shows the folder structure as a tree (with /f, also files).",
+  "example": "tree C:\\Projects /f > tree.txt",
+  "tags": [
+   "tree",
+   "structure"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Search for files by name",
+  "cmd": "dir /s /b <pattern>",
+  "desc": "Searches the current folder and subfolders.",
+  "example": "dir C:\\ /s /b *invoice*.pdf\nwhere /r C:\\Users *.docx",
+  "tags": [
+   "find file",
+   "search file",
+   "locate"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Search text inside files",
+  "cmd": "findstr /s /i \"text\" *.*",
+  "desc": "Searches for text inside files in this folder and subfolders. /n shows line numbers.",
+  "example": "findstr /s /i /n \"password\" *.txt\nfind /c \"error\" log.txt   :: count lines",
+  "tags": [
+   "search inside",
+   "grep",
+   "find text"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Compare two files",
+  "cmd": "fc <file1> <file2>",
+  "desc": "Shows the differences between two files. /b for binary compare.",
+  "example": "fc old.txt new.txt\nfc /b a.exe b.exe",
+  "tags": [
+   "compare",
+   "diff",
+   "difference"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Hide / unhide a file or folder (attrib)",
+  "cmd": "attrib +h +s <file>",
+  "desc": "+h hidden, +s system, +r read-only. Use - to remove.",
+  "example": "attrib +h +s \"C:\\Secret\"\nattrib -h -s -r \"C:\\Secret\"",
+  "tags": [
+   "hide",
+   "hidden",
+   "unhide",
+   "attributes",
+   "read only"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Show hidden files from a virus-infected USB",
+  "cmd": "attrib -h -r -s /s /d E:\\*.*",
+  "desc": "Some USB viruses hide all your files and leave shortcuts. Replace E: with your USB drive letter. Then delete the .lnk shortcuts and scan with antivirus.",
+  "tags": [
+   "usb virus",
+   "shortcut virus",
+   "files disappeared",
+   "hidden files usb",
+   "flash"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "File checksum / hash",
+  "cmd": "certutil -hashfile <file> SHA256",
+  "desc": "Calculates a file's hash to verify downloads. Also MD5, SHA1.",
+  "example": "certutil -hashfile setup.iso SHA256\ncertutil -hashfile file.zip MD5",
+  "tags": [
+   "hash",
+   "checksum",
+   "md5",
+   "sha256",
+   "verify download"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Zip / unzip files",
+  "cmd": "tar -a -c -f archive.zip <files>",
+  "desc": "Windows 10/11 includes tar which can make and extract zip files.",
+  "example": "tar -a -c -f backup.zip Folder\ntar -xf backup.zip\ntar -xf backup.zip -C D:\\Out",
+  "tags": [
+   "zip",
+   "unzip",
+   "compress",
+   "extract",
+   "archive",
+   "rar"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Take ownership of a file/folder",
+  "cmd": "takeown /f \"<path>\" /r /d y",
+  "desc": "Makes you the owner (fixes 'Access is denied' on files). Then grant full rights with icacls.",
+  "example": "takeown /f \"C:\\Locked\" /r /d y\nicacls \"C:\\Locked\" /grant %USERNAME%:F /t",
+  "tags": [
+   "owner",
+   "ownership",
+   "access denied",
+   "permission",
+   "takeown"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Change permissions (icacls)",
+  "cmd": "icacls \"<path>\" /grant <user>:F /t",
+  "desc": "Shows or changes file permissions. F = full, M = modify, R = read. /t = subfolders. /reset resets to inherited.",
+  "example": "icacls \"C:\\Data\"\nicacls \"C:\\Data\" /grant Everyone:F /t\nicacls \"C:\\Data\" /reset /t",
+  "tags": [
+   "permissions",
+   "rights",
+   "acl",
+   "access denied"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Create a shortcut link (mklink)",
+  "cmd": "mklink /d \"<link>\" \"<target>\"",
+  "desc": "Creates a symbolic link. /d for folder, /j junction. Useful to move a big folder to another drive and keep the path working.",
+  "example": "mklink /j \"C:\\Games\" \"D:\\Games\"",
+  "tags": [
+   "symlink",
+   "link",
+   "junction",
+   "move folder"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Folder size",
+  "cmd": "dir /s \"<folder>\"",
+  "desc": "The last lines show the total size. For a nicer view use PowerShell.",
+  "example": "dir /s \"C:\\Users\\%USERNAME%\\Downloads\" | findstr \"File(s)\"\npowershell \"(gci -r C:\\Data | measure Length -s).Sum/1GB\"",
+  "tags": [
+   "size",
+   "folder size",
+   "space"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Open Explorer at current folder",
+  "cmd": "start .",
+  "desc": "Opens the current folder in File Explorer.  explorer <path>  opens any folder.",
+  "example": "explorer C:\\Windows\nexplorer shell:startup",
+  "tags": [
+   "explorer",
+   "open folder"
+  ]
+ },
+ {
+  "cat": "Files & Folders",
+  "title": "Encrypt / compress a folder",
+  "cmd": "compact /c /s:<folder>",
+  "desc": "NTFS-compresses files to save disk space. cipher /e encrypts (Pro editions).",
+  "example": "compact /c /s:\"C:\\OldFiles\"\ncipher /e \"C:\\Private\"",
+  "tags": [
+   "compress",
+   "encrypt",
+   "save space"
+  ]
+ },
+ {
+  "cat": "Disk & Storage",
+  "title": "Check and repair disk errors (chkdsk)",
+  "cmd": "chkdsk C: /f /r",
+  "desc": "Scans the disk for errors. /f fixes errors, /r finds bad sectors (slow). For C: it asks to run at next restart - type Y and reboot.",
+  "example": "chkdsk C:          :: just check (read-only)\nchkdsk D: /f\nchkdsk C: /f /r /x",
+  "tags": [
+   "disk error",
+   "bad sector",
+   "corrupt",
+   "hard disk",
+   "chkdsk",
+   "scan disk"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Disk & Storage",
+  "title": "Manage partitions (diskpart)",
+  "cmd": "diskpart",
+  "desc": "Powerful disk tool. Inside diskpart:\n  list disk\n  select disk 1\n  list partition / list volume\n  exit\nBe VERY careful selecting the right disk.",
+  "tags": [
+   "partition",
+   "diskpart",
+   "disk management"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Disk & Storage",
+  "title": "Format / repair a USB that shows wrong size or won't format",
+  "cmd": "diskpart",
+  "desc": "In diskpart (ALL DATA on that disk is erased!):\n  list disk\n  select disk X        (X = your USB, check the size!)\n  clean\n  create partition primary\n  format fs=fat32 quick     (or fs=ntfs / exfat)\n  assign\n  exit",
+  "tags": [
+   "usb",
+   "flash",
+   "format",
+   "write protected",
+   "raw",
+   "wrong size",
+   "cannot format",
+   "sd card"
+  ],
+  "admin": true,
+  "danger": true
+ },
+ {
+  "cat": "Disk & Storage",
+  "title": "Remove write protection from a USB",
+  "cmd": "diskpart",
+  "desc": "In diskpart:\n  list disk\n  select disk X\n  attributes disk clear readonly\n  exit\nIf it still fails, the USB may have a physical lock switch or be dying.",
+  "tags": [
+   "write protected",
+   "read only usb",
+   "flash",
+   "cannot write",
+   "media is write protected"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Disk & Storage",
+  "title": "Format a drive",
+  "cmd": "format E: /fs:ntfs /q",
+  "desc": "Formats a drive. /q quick format. /fs: ntfs, fat32, exfat. ERASES ALL DATA.",
+  "example": "format E: /fs:exfat /q /v:MyUSB",
+  "tags": [
+   "format",
+   "erase drive"
+  ],
+  "admin": true,
+  "danger": true
+ },
+ {
+  "cat": "Disk & Storage",
+  "title": "Free space on drives",
+  "cmd": "wmic logicaldisk get caption,freespace,size",
+  "desc": "Shows free space (bytes) on all drives. PowerShell version is nicer.",
+  "example": "powershell \"Get-PSDrive -PSProvider FileSystem\"\nfsutil volume diskfree C:",
+  "tags": [
+   "free space",
+   "disk space",
+   "storage full"
+  ]
+ },
+ {
+  "cat": "Disk & Storage",
+  "title": "Clean temporary files",
+  "cmd": "del /s /q /f %TEMP%\\*",
+  "desc": "Deletes your temporary files (some in use will be skipped - that's normal). Also run  cleanmgr  for Disk Cleanup.",
+  "example": "del /s /q /f %TEMP%\\*\ndel /s /q /f C:\\Windows\\Temp\\*\ncleanmgr /sageset:1 & cleanmgr /sagerun:1",
+  "tags": [
+   "temp",
+   "clean",
+   "junk",
+   "disk full",
+   "free space",
+   "cleanup"
+  ],
+  "danger": true
+ },
+ {
+  "cat": "Disk & Storage",
+  "title": "Disk Cleanup (including system files)",
+  "cmd": "cleanmgr /d C:",
+  "desc": "Opens Disk Cleanup. Click 'Clean up system files' to remove old Windows Update files.",
+  "tags": [
+   "cleanup",
+   "disk full",
+   "free space",
+   "junk"
+  ]
+ },
+ {
+  "cat": "Disk & Storage",
+  "title": "Clean old Windows Update leftovers (WinSxS)",
+  "cmd": "DISM /Online /Cleanup-Image /StartComponentCleanup",
+  "desc": "Frees space used by old updates in C:\\Windows\\WinSxS. /ResetBase frees more but you can't uninstall updates after.",
+  "example": "DISM /Online /Cleanup-Image /AnalyzeComponentStore",
+  "tags": [
+   "winsxs",
+   "space",
+   "cleanup",
+   "update files"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Disk & Storage",
+  "title": "Disable hibernation (frees GBs on C:)",
+  "cmd": "powercfg /h off",
+  "desc": "Deletes hiberfil.sys (often several GB). Disables hibernate and Fast Startup. powercfg /h on to re-enable.",
+  "tags": [
+   "hiberfil",
+   "space",
+   "hibernate",
+   "disk full"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Disk & Storage",
+  "title": "Defragment / optimize drive",
+  "cmd": "defrag C: /o",
+  "desc": "Optimizes the drive (defrag for HDD, TRIM for SSD). /a = analyze only.",
+  "example": "defrag C: /a\ndefrag /c /o     :: all drives",
+  "tags": [
+   "defrag",
+   "optimize",
+   "slow disk",
+   "trim",
+   "ssd"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Disk & Storage",
+  "title": "Disk health (SMART status)",
+  "cmd": "wmic diskdrive get model,status",
+  "desc": "'OK' means SMART sees no problem. 'Pred Fail' = back up NOW, disk is dying.",
+  "example": "powershell \"Get-PhysicalDisk | ft FriendlyName,MediaType,HealthStatus,Size\"",
+  "tags": [
+   "disk health",
+   "smart",
+   "dying disk",
+   "hdd",
+   "ssd"
+  ]
+ },
+ {
+  "cat": "Disk & Storage",
+  "title": "Change drive letter",
+  "cmd": "diskpart",
+  "desc": "In diskpart:\n  list volume\n  select volume N\n  assign letter=Z\n  exit\nOr: Win+R > diskmgmt.msc",
+  "tags": [
+   "drive letter",
+   "change letter"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Disk & Storage",
+  "title": "Convert drive FAT32 to NTFS (no data loss)",
+  "cmd": "convert E: /fs:ntfs",
+  "desc": "Converts without erasing. Fixes 'file is too large for the destination file system' (FAT32 4GB limit).",
+  "tags": [
+   "fat32",
+   "ntfs",
+   "file too large",
+   "4gb"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Disk & Storage",
+  "title": "Disk Management window",
+  "cmd": "diskmgmt.msc",
+  "desc": "Opens the graphical Disk Management tool.",
+  "tags": [
+   "disk management",
+   "partitions gui"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Show IP address and network info",
+  "cmd": "ipconfig",
+  "desc": "Shows your IP, gateway (router) and subnet. /all shows MAC address, DNS servers, DHCP.",
+  "example": "ipconfig\nipconfig /all\nipconfig | findstr IPv4",
+  "tags": [
+   "ip",
+   "ip address",
+   "network info",
+   "mac",
+   "router ip",
+   "gateway"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Fix internet: release / renew IP",
+  "cmd": "ipconfig /release\nipconfig /renew",
+  "desc": "Asks the router for a new IP address. Fixes 'No Internet' / 'Limited connectivity' / 169.254.x.x addresses.",
+  "tags": [
+   "no internet",
+   "limited",
+   "renew ip",
+   "169.254",
+   "net ma 3am yemshi",
+   "internet"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Flush DNS cache",
+  "cmd": "ipconfig /flushdns",
+  "desc": "Clears saved DNS. Fixes sites not loading, wrong sites, DNS_PROBE_FINISHED errors after DNS change.",
+  "example": "ipconfig /displaydns     :: see cache\nipconfig /registerdns",
+  "tags": [
+   "dns",
+   "flush",
+   "site not loading",
+   "dns_probe"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "FULL network reset (fixes most internet problems)",
+  "cmd": "netsh winsock reset\nnetsh int ip reset\nipconfig /release\nipconfig /renew\nipconfig /flushdns",
+  "desc": "Resets Winsock catalog and TCP/IP stack to default. Restart the PC after. Fixes many 'No internet' issues, broken connections after VPN/malware removal.\nAlso: Settings > Network > Advanced > Network reset.",
+  "tags": [
+   "network reset",
+   "no internet",
+   "winsock",
+   "tcp ip",
+   "fix internet",
+   "internet ma 3am yemshi",
+   "wifi connected no internet"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Ping (test connection)",
+  "cmd": "ping google.com",
+  "desc": "Tests if a host answers and shows delay (ms). -t = continuous (Ctrl+C to stop). -n 10 = 10 times.\nping 8.8.8.8 works but ping google.com doesn't = DNS problem.",
+  "example": "ping 8.8.8.8\nping google.com -t\nping 192.168.1.1     :: your router",
+  "tags": [
+   "ping",
+   "test internet",
+   "latency",
+   "lag",
+   "connection test"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Trace route (where the connection breaks)",
+  "cmd": "tracert google.com",
+  "desc": "Shows every hop between you and the server. Where it starts timing out is where the problem is. pathping is a slower, more detailed version.",
+  "example": "tracert -d 8.8.8.8\npathping google.com",
+  "tags": [
+   "traceroute",
+   "hops",
+   "route",
+   "lag"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "DNS lookup",
+  "cmd": "nslookup google.com",
+  "desc": "Shows which IP a domain points to, and which DNS server answered.",
+  "example": "nslookup google.com 8.8.8.8     :: ask Google DNS\nnslookup -type=mx gmail.com",
+  "tags": [
+   "dns",
+   "lookup",
+   "domain",
+   "nslookup"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Show open connections & ports",
+  "cmd": "netstat -ano",
+  "desc": "-a all, -n numeric, -o process ID (PID). Find PID then check it with tasklist.",
+  "example": "netstat -ano | findstr LISTENING\nnetstat -ano | findstr :3000\ntasklist /fi \"PID eq 1234\"\nnetstat -b      :: show program names (admin)",
+  "tags": [
+   "ports",
+   "connections",
+   "netstat",
+   "listening",
+   "port in use"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Port already in use - find and kill it",
+  "cmd": "netstat -ano | findstr :<port>",
+  "desc": "Find the PID using the port (last column) then kill it:\n  taskkill /PID <pid> /F\nFixes 'Address already in use', 'EADDRINUSE', 'port 8080 is already in use'.",
+  "example": "netstat -ano | findstr :8080\ntaskkill /PID 4321 /F",
+  "tags": [
+   "port in use",
+   "eaddrinuse",
+   "address already in use",
+   "kill port"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Show saved Wi-Fi networks",
+  "cmd": "netsh wlan show profiles",
+  "desc": "Lists all Wi-Fi networks saved on this PC.",
+  "tags": [
+   "wifi",
+   "wireless",
+   "saved networks",
+   "profiles"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Show saved Wi-Fi password",
+  "cmd": "netsh wlan show profile name=\"<WiFi name>\" key=clear",
+  "desc": "Shows the password of a Wi-Fi network this PC has connected to before (look for 'Key Content').",
+  "example": "netsh wlan show profile name=\"MyHome\" key=clear | findstr Key",
+  "tags": [
+   "wifi password",
+   "forgot password",
+   "key",
+   "wireless password",
+   "kelmet el ser"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Forget a Wi-Fi network",
+  "cmd": "netsh wlan delete profile name=\"<WiFi name>\"",
+  "desc": "Deletes a saved Wi-Fi network (fixes wrong saved password).",
+  "tags": [
+   "wifi",
+   "forget",
+   "remove network",
+   "wrong password"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Wi-Fi adapter info / signal",
+  "cmd": "netsh wlan show interfaces",
+  "desc": "Shows current Wi-Fi network, signal %, speed, channel.",
+  "tags": [
+   "wifi signal",
+   "speed",
+   "interfaces"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Wi-Fi report (why Wi-Fi disconnects)",
+  "cmd": "netsh wlan show wlanreport",
+  "desc": "Generates an HTML report of Wi-Fi sessions & disconnections in C:\\ProgramData\\Microsoft\\Windows\\WlanReport\\.",
+  "tags": [
+   "wifi disconnects",
+   "wifi report",
+   "dropping"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Change DNS to Google / Cloudflare",
+  "cmd": "netsh interface ip set dns name=\"Wi-Fi\" static 8.8.8.8",
+  "desc": "Sets DNS server for an adapter. Use your adapter name from  netsh interface show interface  (\"Wi-Fi\" or \"Ethernet\").",
+  "example": "netsh interface ip set dns name=\"Wi-Fi\" static 1.1.1.1\nnetsh interface ip add dns name=\"Wi-Fi\" 8.8.4.4 index=2\nnetsh interface ip set dns name=\"Wi-Fi\" dhcp      :: back to automatic",
+  "tags": [
+   "dns",
+   "change dns",
+   "8.8.8.8",
+   "cloudflare",
+   "google dns",
+   "faster internet"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "List network adapters",
+  "cmd": "netsh interface show interface",
+  "desc": "Shows adapters and if they're enabled/connected.",
+  "example": "netsh interface set interface \"Wi-Fi\" disable\nnetsh interface set interface \"Wi-Fi\" enable",
+  "tags": [
+   "adapter",
+   "network card",
+   "enable",
+   "disable"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Restart network adapter",
+  "cmd": "netsh interface set interface \"Wi-Fi\" disable & netsh interface set interface \"Wi-Fi\" enable",
+  "desc": "Turns the adapter off and on again. Replace \"Wi-Fi\" with \"Ethernet\" if wired.",
+  "tags": [
+   "restart wifi",
+   "reset adapter"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Set static IP",
+  "cmd": "netsh interface ip set address name=\"Ethernet\" static 192.168.1.50 255.255.255.0 192.168.1.1",
+  "desc": "Sets a fixed IP, mask and gateway. Back to automatic:  netsh interface ip set address name=\"Ethernet\" dhcp",
+  "tags": [
+   "static ip",
+   "fixed ip",
+   "dhcp"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "ARP table (devices on your network)",
+  "cmd": "arp -a",
+  "desc": "Lists IP and MAC addresses of devices your PC talked to on the local network.",
+  "tags": [
+   "devices",
+   "mac address",
+   "local network",
+   "who is connected"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Routing table",
+  "cmd": "route print",
+  "desc": "Shows the routing table.",
+  "tags": [
+   "route",
+   "gateway",
+   "routing"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Download a file from CMD",
+  "cmd": "curl -L -o <file> <url>",
+  "desc": "Windows 10/11 include curl.",
+  "example": "curl -L -o setup.exe https://example.com/setup.exe\ncurl ifconfig.me          :: your public IP",
+  "tags": [
+   "download",
+   "curl",
+   "wget",
+   "public ip"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Show public (external) IP",
+  "cmd": "curl ifconfig.me",
+  "desc": "Shows your public internet IP address.",
+  "example": "nslookup myip.opendns.com resolver1.opendns.com",
+  "tags": [
+   "public ip",
+   "external ip",
+   "real ip"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Test if a port is open on a server",
+  "cmd": "powershell \"Test-NetConnection google.com -Port 443\"",
+  "desc": "Checks if you can reach a specific port (TcpTestSucceeded: True).",
+  "tags": [
+   "port test",
+   "telnet",
+   "open port",
+   "firewall"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Firewall on / off / status",
+  "cmd": "netsh advfirewall show allprofiles",
+  "desc": "Shows firewall state. Turning it off is NOT recommended except for short testing.",
+  "example": "netsh advfirewall set allprofiles state off\nnetsh advfirewall set allprofiles state on\nnetsh advfirewall reset      :: back to defaults",
+  "tags": [
+   "firewall",
+   "block",
+   "defender firewall"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Allow a port through the firewall",
+  "cmd": "netsh advfirewall firewall add rule name=\"My Port 8080\" dir=in action=allow protocol=TCP localport=8080",
+  "desc": "Opens a port for incoming connections (servers, games). Delete with: netsh advfirewall firewall delete rule name=\"My Port 8080\"",
+  "tags": [
+   "open port",
+   "firewall rule",
+   "allow port",
+   "server",
+   "game"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Block a program in the firewall",
+  "cmd": "netsh advfirewall firewall add rule name=\"Block App\" dir=out action=block program=\"C:\\path\\app.exe\"",
+  "desc": "Blocks a program from accessing the internet.",
+  "tags": [
+   "block internet",
+   "block program",
+   "firewall"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Share a folder on the network",
+  "cmd": "net share MyShare=\"C:\\Shared\" /grant:everyone,full",
+  "desc": "Shares a folder. net share alone lists shares. net share MyShare /delete removes it.",
+  "tags": [
+   "share",
+   "network share",
+   "smb"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Connect a network drive",
+  "cmd": "net use Z: \\\\<server>\\<share>",
+  "desc": "Maps a shared folder to a drive letter. net use shows mapped drives, net use Z: /delete removes it.",
+  "example": "net use Z: \\\\192.168.1.10\\Movies /persistent:yes\nnet use * /delete",
+  "tags": [
+   "map drive",
+   "network drive",
+   "net use",
+   "nas"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Turn PC into a Wi-Fi hotspot",
+  "cmd": "",
+  "desc": "Modern way: Settings > Network & Internet > Mobile hotspot.\nOld netsh hostednetwork commands don't work on most new Wi-Fi drivers. Check support with: netsh wlan show drivers  (look for 'Hosted network supported').",
+  "tags": [
+   "hotspot",
+   "share internet",
+   "wifi hotspot"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Remote Desktop to another PC",
+  "cmd": "mstsc /v:<ip>",
+  "desc": "Opens Remote Desktop connection.",
+  "example": "mstsc /v:192.168.1.20",
+  "tags": [
+   "rdp",
+   "remote desktop",
+   "mstsc"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Network connections window",
+  "cmd": "ncpa.cpl",
+  "desc": "Opens Network Connections (adapter settings).",
+  "tags": [
+   "adapter settings",
+   "network connections"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Hosts file (block / redirect sites)",
+  "cmd": "notepad C:\\Windows\\System32\\drivers\\etc\\hosts",
+  "desc": "Edit as admin. Add lines like  0.0.0.0 badsite.com  to block a site. Then ipconfig /flushdns.",
+  "tags": [
+   "hosts",
+   "block website",
+   "redirect"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "System Info",
+  "title": "Full system information",
+  "cmd": "systeminfo",
+  "desc": "Windows version, install date, RAM, BIOS, uptime, hotfixes...",
+  "example": "systeminfo | findstr /c:\"OS Name\" /c:\"OS Version\" /c:\"Total Physical Memory\"\nsysteminfo > C:\\sysinfo.txt",
+  "tags": [
+   "system info",
+   "specs",
+   "pc info",
+   "ram",
+   "version"
+  ]
+ },
+ {
+  "cat": "System Info",
+  "title": "Windows version",
+  "cmd": "winver",
+  "desc": "Shows the Windows version window.  ver  prints it in CMD.",
+  "example": "ver",
+  "tags": [
+   "version",
+   "windows version",
+   "build"
+  ]
+ },
+ {
+  "cat": "System Info",
+  "title": "Computer name",
+  "cmd": "hostname",
+  "desc": "Shows the PC name.",
+  "tags": [
+   "pc name",
+   "computer name"
+  ]
+ },
+ {
+  "cat": "System Info",
+  "title": "CPU info",
+  "cmd": "wmic cpu get name,numberofcores,numberoflogicalprocessors,maxclockspeed",
+  "desc": "Processor model, cores and threads.",
+  "example": "powershell \"Get-CimInstance Win32_Processor | select Name,NumberOfCores,NumberOfLogicalProcessors\"",
+  "tags": [
+   "cpu",
+   "processor",
+   "cores"
+  ]
+ },
+ {
+  "cat": "System Info",
+  "title": "RAM info (size, speed, slots)",
+  "cmd": "wmic memorychip get capacity,speed,manufacturer,devicelocator",
+  "desc": "Shows each RAM stick.",
+  "example": "powershell \"Get-CimInstance Win32_PhysicalMemory | select DeviceLocator,Capacity,Speed\"",
+  "tags": [
+   "ram",
+   "memory",
+   "slots"
+  ]
+ },
+ {
+  "cat": "System Info",
+  "title": "GPU / graphics card info",
+  "cmd": "wmic path win32_videocontroller get name,driverversion",
+  "desc": "Shows graphics card and driver version. dxdiag gives a full report.",
+  "example": "dxdiag",
+  "tags": [
+   "gpu",
+   "graphics card",
+   "video card",
+   "nvidia",
+   "amd",
+   "driver"
+  ]
+ },
+ {
+  "cat": "System Info",
+  "title": "Motherboard & BIOS info",
+  "cmd": "wmic baseboard get product,manufacturer\nwmic bios get smbiosbiosversion,serialnumber",
+  "desc": "Motherboard model and BIOS version.",
+  "tags": [
+   "motherboard",
+   "bios",
+   "serial"
+  ]
+ },
+ {
+  "cat": "System Info",
+  "title": "Serial number of the PC / laptop",
+  "cmd": "wmic bios get serialnumber",
+  "desc": "Shows the device serial number (for warranty).",
+  "example": "powershell \"(Get-CimInstance Win32_BIOS).SerialNumber\"",
+  "tags": [
+   "serial",
+   "service tag",
+   "warranty"
+  ]
+ },
+ {
+  "cat": "System Info",
+  "title": "Windows product key (from BIOS)",
+  "cmd": "wmic path softwarelicensingservice get OA3xOriginalProductKey",
+  "desc": "Shows the key embedded in BIOS on laptops/PCs that came with Windows. Empty = no OEM key.",
+  "tags": [
+   "product key",
+   "license key",
+   "serial key"
+  ]
+ },
+ {
+  "cat": "System Info",
+  "title": "Check Windows activation",
+  "cmd": "slmgr /xpr",
+  "desc": "Shows if Windows is activated. slmgr /dli = license info, slmgr /dlv = detailed.",
+  "example": "slmgr /dli\nslmgr /dlv",
+  "tags": [
+   "activation",
+   "activated",
+   "license",
+   "slmgr"
+  ]
+ },
+ {
+  "cat": "System Info",
+  "title": "Battery health report (laptop)",
+  "cmd": "powercfg /batteryreport",
+  "desc": "Creates battery-report.html in the current folder. Compare DESIGN CAPACITY vs FULL CHARGE CAPACITY to see battery wear.",
+  "example": "powercfg /batteryreport /output \"%USERPROFILE%\\Desktop\\battery.html\"",
+  "tags": [
+   "battery",
+   "health",
+   "laptop battery",
+   "wear"
+  ]
+ },
+ {
+  "cat": "System Info",
+  "title": "Uptime (how long since restart)",
+  "cmd": "systeminfo | find \"System Boot Time\"",
+  "desc": "Shows when the PC last booted.",
+  "example": "powershell \"(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime\"",
+  "tags": [
+   "uptime",
+   "boot time",
+   "last restart"
+  ]
+ },
+ {
+  "cat": "System Info",
+  "title": "Installed programs list",
+  "cmd": "winget list",
+  "desc": "Lists installed programs (winget is included in Windows 10/11).",
+  "example": "wmic product get name,version    :: slow, only MSI\nwinget list > programs.txt",
+  "tags": [
+   "installed programs",
+   "apps",
+   "software list"
+  ]
+ },
+ {
+  "cat": "System Info",
+  "title": "DirectX diagnostics",
+  "cmd": "dxdiag",
+  "desc": "Opens DirectX diagnostic tool (graphics, sound, drivers). /t saves to a file.",
+  "example": "dxdiag /t C:\\dxdiag.txt",
+  "tags": [
+   "directx",
+   "dxdiag",
+   "games"
+  ]
+ },
+ {
+  "cat": "System Info",
+  "title": "Installed drivers list",
+  "cmd": "driverquery",
+  "desc": "Lists drivers. /v verbose, /si signed info.",
+  "example": "driverquery /v > drivers.txt",
+  "tags": [
+   "drivers",
+   "driver list"
+  ]
+ },
+ {
+  "cat": "System Info",
+  "title": "Installed updates (hotfixes)",
+  "cmd": "wmic qfe list brief",
+  "desc": "Lists installed Windows updates (KB numbers).",
+  "example": "powershell \"Get-HotFix | sort InstalledOn -desc\"",
+  "tags": [
+   "updates",
+   "kb",
+   "hotfix",
+   "installed updates"
+  ]
+ },
+ {
+  "cat": "System Info",
+  "title": "System Information window",
+  "cmd": "msinfo32",
+  "desc": "Detailed GUI with all hardware and software info.",
+  "tags": [
+   "msinfo",
+   "system information"
+  ]
+ },
+ {
+  "cat": "System Info",
+  "title": "Energy / power efficiency report",
+  "cmd": "powercfg /energy",
+  "desc": "Analyzes power problems for 60 sec and creates energy-report.html.",
+  "tags": [
+   "power",
+   "energy",
+   "battery drain"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "System Info",
+  "title": "What wakes up my PC from sleep",
+  "cmd": "powercfg /lastwake",
+  "desc": "Shows what woke the PC.  powercfg /waketimers  shows scheduled wakes.  powercfg /devicequery wake_armed  shows devices allowed to wake.",
+  "example": "powercfg /waketimers\npowercfg /devicequery wake_armed",
+  "tags": [
+   "sleep",
+   "wakes up",
+   "turns on by itself"
+  ]
+ },
+ {
+  "cat": "Processes & Services",
+  "title": "List running programs (tasklist)",
+  "cmd": "tasklist",
+  "desc": "Shows running processes with PID and memory.",
+  "example": "tasklist | findstr /i chrome\ntasklist /fi \"memusage gt 500000\"   :: using > 500MB\ntasklist /svc",
+  "tags": [
+   "processes",
+   "running",
+   "task manager",
+   "pid"
+  ]
+ },
+ {
+  "cat": "Processes & Services",
+  "title": "Kill a program that is not responding",
+  "cmd": "taskkill /im <name.exe> /f",
+  "desc": "Force-closes a program by name or by PID. /t also kills child processes.",
+  "example": "taskkill /im chrome.exe /f\ntaskkill /pid 1234 /f\ntaskkill /f /fi \"status eq not responding\"",
+  "tags": [
+   "kill",
+   "close",
+   "not responding",
+   "frozen",
+   "end task",
+   "hang",
+   "m3alla2"
+  ]
+ },
+ {
+  "cat": "Processes & Services",
+  "title": "Restart Windows Explorer (taskbar frozen)",
+  "cmd": "taskkill /f /im explorer.exe & start explorer.exe",
+  "desc": "Fixes frozen taskbar, desktop or Start menu without restarting the PC.",
+  "tags": [
+   "taskbar frozen",
+   "explorer",
+   "start menu not working",
+   "desktop frozen"
+  ]
+ },
+ {
+  "cat": "Processes & Services",
+  "title": "Open Task Manager",
+  "cmd": "taskmgr",
+  "desc": "Opens Task Manager (or Ctrl+Shift+Esc).",
+  "tags": [
+   "task manager"
+  ]
+ },
+ {
+  "cat": "Processes & Services",
+  "title": "List services",
+  "cmd": "sc query",
+  "desc": "Lists running services. sc query state= all shows all. net start lists started services.",
+  "example": "sc query state= all | findstr SERVICE_NAME\nnet start",
+  "tags": [
+   "services",
+   "service list"
+  ]
+ },
+ {
+  "cat": "Processes & Services",
+  "title": "Start / stop / restart a service",
+  "cmd": "net stop <service> && net start <service>",
+  "desc": "Stops and starts a Windows service.",
+  "example": "net stop spooler && net start spooler\nsc stop wuauserv\nsc start wuauserv",
+  "tags": [
+   "service",
+   "restart service",
+   "start",
+   "stop"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Processes & Services",
+  "title": "Disable / enable a service",
+  "cmd": "sc config <service> start= disabled",
+  "desc": "start= auto | demand (manual) | disabled. Note the space after =.",
+  "example": "sc config SysMain start= disabled\nsc config SysMain start= auto",
+  "tags": [
+   "disable service",
+   "startup type"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Processes & Services",
+  "title": "Services window",
+  "cmd": "services.msc",
+  "desc": "Opens the Services manager.",
+  "tags": [
+   "services gui"
+  ]
+ },
+ {
+  "cat": "Processes & Services",
+  "title": "Startup programs",
+  "cmd": "wmic startup get caption,command",
+  "desc": "Lists programs that start with Windows. Manage them in Task Manager > Startup, or open the startup folder with  start shell:startup",
+  "example": "start shell:startup\nstart shell:common startup",
+  "tags": [
+   "startup",
+   "boot programs",
+   "autostart",
+   "slow boot"
+  ]
+ },
+ {
+  "cat": "Processes & Services",
+  "title": "Schedule a task",
+  "cmd": "schtasks /create /tn \"<name>\" /tr \"<program>\" /sc daily /st 09:00",
+  "desc": "Runs a program on a schedule. /sc: once, daily, weekly, onlogon, onstart.",
+  "example": "schtasks /create /tn \"Backup\" /tr \"C:\\backup.bat\" /sc daily /st 22:00\nschtasks /query /fo list | more\nschtasks /delete /tn \"Backup\" /f\nschtasks /run /tn \"Backup\"",
+  "tags": [
+   "schedule",
+   "task scheduler",
+   "automatic",
+   "timer"
+  ]
+ },
+ {
+  "cat": "Processes & Services",
+  "title": "Run a program as another user",
+  "cmd": "runas /user:<user> <program>",
+  "desc": "Starts a program under another account.",
+  "example": "runas /user:Administrator cmd",
+  "tags": [
+   "runas",
+   "another user"
+  ]
+ },
+ {
+  "cat": "Processes & Services",
+  "title": "Set process priority",
+  "cmd": "wmic process where name=\"game.exe\" CALL setpriority \"high priority\"",
+  "desc": "Changes priority: idle, below normal, normal, above normal, high priority, realtime.",
+  "tags": [
+   "priority",
+   "performance",
+   "game"
+  ]
+ },
+ {
+  "cat": "Users & Accounts",
+  "title": "List user accounts",
+  "cmd": "net user",
+  "desc": "Lists all local accounts. net user <name> shows details.",
+  "example": "net user %USERNAME%",
+  "tags": [
+   "users",
+   "accounts",
+   "list users"
+  ]
+ },
+ {
+  "cat": "Users & Accounts",
+  "title": "Create a new user",
+  "cmd": "net user <name> <password> /add",
+  "desc": "Creates a local account.",
+  "example": "net user Ali P@ssw0rd /add",
+  "tags": [
+   "add user",
+   "new user",
+   "create account"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Users & Accounts",
+  "title": "Make a user Administrator",
+  "cmd": "net localgroup administrators <name> /add",
+  "desc": "Adds a user to the Administrators group. Use /delete to remove.",
+  "tags": [
+   "admin rights",
+   "make admin",
+   "administrators"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Users & Accounts",
+  "title": "Change / reset a user's password",
+  "cmd": "net user <name> <newpassword>",
+  "desc": "Sets a new password.  net user <name> *  asks for it hidden.",
+  "example": "net user Ali *",
+  "tags": [
+   "password",
+   "reset password",
+   "change password"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Users & Accounts",
+  "title": "Delete a user",
+  "cmd": "net user <name> /delete",
+  "desc": "Deletes a local account (its files in C:\\Users stay).",
+  "tags": [
+   "delete user",
+   "remove account"
+  ],
+  "admin": true,
+  "danger": true
+ },
+ {
+  "cat": "Users & Accounts",
+  "title": "Enable the hidden Administrator account",
+  "cmd": "net user administrator /active:yes",
+  "desc": "Enables the built-in Administrator. Set a password! /active:no to disable again.",
+  "tags": [
+   "hidden admin",
+   "built-in administrator"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Users & Accounts",
+  "title": "Local users & groups window",
+  "cmd": "lusrmgr.msc",
+  "desc": "GUI to manage users and groups (Pro editions). Or:  netplwiz",
+  "example": "netplwiz",
+  "tags": [
+   "users gui",
+   "auto login"
+  ]
+ },
+ {
+  "cat": "Users & Accounts",
+  "title": "Lock / sign out / switch user",
+  "cmd": "rundll32.exe user32.dll,LockWorkStation",
+  "desc": "Locks the PC (same as Win+L).  logoff  or  shutdown /l  signs out.",
+  "example": "logoff\nshutdown /l",
+  "tags": [
+   "lock",
+   "logout",
+   "sign out"
+  ]
+ },
+ {
+  "cat": "Shutdown & Power",
+  "title": "Shut down",
+  "cmd": "shutdown /s /t 0",
+  "desc": "Shuts down now. /t = seconds delay.",
+  "example": "shutdown /s /t 3600   :: in 1 hour",
+  "tags": [
+   "shutdown",
+   "turn off",
+   "tafe"
+  ]
+ },
+ {
+  "cat": "Shutdown & Power",
+  "title": "Restart",
+  "cmd": "shutdown /r /t 0",
+  "desc": "Restarts the PC now.",
+  "tags": [
+   "restart",
+   "reboot"
+  ]
+ },
+ {
+  "cat": "Shutdown & Power",
+  "title": "Schedule shutdown & cancel it",
+  "cmd": "shutdown /s /t <seconds>",
+  "desc": "Shutdown timer. shutdown /a cancels it.",
+  "example": "shutdown /s /t 1800    :: 30 minutes\nshutdown /a            :: cancel",
+  "tags": [
+   "timer",
+   "schedule shutdown",
+   "cancel shutdown"
+  ]
+ },
+ {
+  "cat": "Shutdown & Power",
+  "title": "Restart into BIOS / UEFI",
+  "cmd": "shutdown /r /fw /t 0",
+  "desc": "Reboots directly into the BIOS/UEFI settings (UEFI PCs only).",
+  "tags": [
+   "bios",
+   "uefi",
+   "firmware",
+   "boot menu"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Shutdown & Power",
+  "title": "Restart into Advanced Startup (recovery options)",
+  "cmd": "shutdown /r /o /t 0",
+  "desc": "Opens the blue recovery menu: Safe Mode, Startup Repair, System Restore, Command Prompt, uninstall updates.",
+  "tags": [
+   "recovery",
+   "advanced startup",
+   "safe mode",
+   "repair"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Shutdown & Power",
+  "title": "Boot into Safe Mode",
+  "cmd": "bcdedit /set {current} safeboot minimal",
+  "desc": "Next restart boots in Safe Mode. Use 'network' instead of 'minimal' for networking.\nIMPORTANT: undo afterwards with:  bcdedit /deletevalue {current} safeboot",
+  "tags": [
+   "safe mode",
+   "safemode",
+   "virus",
+   "driver problem"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Shutdown & Power",
+  "title": "Exit Safe Mode (stuck in Safe Mode)",
+  "cmd": "bcdedit /deletevalue {current} safeboot",
+  "desc": "Removes the Safe Mode flag so Windows boots normally.",
+  "tags": [
+   "stuck safe mode",
+   "exit safe mode"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Shutdown & Power",
+  "title": "Sleep / hibernate",
+  "cmd": "rundll32.exe powrprof.dll,SetSuspendState 0,1,0",
+  "desc": "Puts the PC to sleep (if hibernation is on it hibernates instead).  shutdown /h  hibernates.",
+  "example": "shutdown /h",
+  "tags": [
+   "sleep",
+   "hibernate"
+  ]
+ },
+ {
+  "cat": "Shutdown & Power",
+  "title": "Power plans",
+  "cmd": "powercfg /list",
+  "desc": "Lists power plans. Switch with /setactive.",
+  "example": "powercfg /setactive SCHEME_MIN      :: High performance\npowercfg /setactive SCHEME_BALANCED\npowercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61   :: Ultimate Performance",
+  "tags": [
+   "power plan",
+   "high performance",
+   "ultimate performance",
+   "battery"
+  ]
+ },
+ {
+  "cat": "Shutdown & Power",
+  "title": "Turn off screen timeout / sleep",
+  "cmd": "powercfg /change standby-timeout-ac 0",
+  "desc": "0 = never. Also monitor-timeout-ac, -dc for battery.",
+  "example": "powercfg /change monitor-timeout-ac 15",
+  "tags": [
+   "sleep timeout",
+   "screen off"
+  ]
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Repair Windows system files (SFC)",
+  "cmd": "sfc /scannow",
+  "desc": "Scans and repairs corrupted Windows files. Takes 10-20 min. If it says it couldn't fix some files, run DISM first then sfc again.",
+  "tags": [
+   "repair",
+   "corrupt",
+   "system files",
+   "sfc",
+   "fix windows",
+   "broken windows",
+   "crash"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Repair the Windows image (DISM) - run before SFC",
+  "cmd": "DISM /Online /Cleanup-Image /RestoreHealth\nsfc /scannow",
+  "desc": "Downloads good copies of Windows files from Windows Update and repairs the system image. Then sfc fixes the files. Best general repair combo.\nCheck only: /CheckHealth or /ScanHealth.",
+  "example": "DISM /Online /Cleanup-Image /CheckHealth\nDISM /Online /Cleanup-Image /ScanHealth",
+  "tags": [
+   "dism",
+   "repair",
+   "restorehealth",
+   "corrupt",
+   "fix windows"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "DISM error 0x800f081f (source files not found)",
+  "cmd": "DISM /Online /Cleanup-Image /RestoreHealth /Source:wim:D:\\sources\\install.wim:1 /LimitAccess",
+  "desc": "DISM can't download files. Mount a Windows ISO (double-click it), note its drive letter (D: here). If the ISO has install.esd instead, use esd: instead of wim:.",
+  "tags": [
+   "0x800f081f",
+   "dism failed",
+   "source files could not be found"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "System Restore",
+  "cmd": "rstrui",
+  "desc": "Opens System Restore to roll back Windows to an earlier restore point.",
+  "tags": [
+   "restore",
+   "system restore",
+   "go back",
+   "undo"
+  ]
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Create a restore point",
+  "cmd": "wmic.exe /Namespace:\\\\root\\default Path SystemRestore Call CreateRestorePoint \"Before changes\", 100, 7",
+  "desc": "Creates a restore point now (System Protection must be on).",
+  "tags": [
+   "restore point",
+   "backup"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Fix boot: Startup / boot repair (bootrec)",
+  "cmd": "bootrec /fixmbr\nbootrec /fixboot\nbootrec /scanos\nbootrec /rebuildbcd",
+  "desc": "Run from the recovery Command Prompt (boot from Windows USB > Repair your computer > Troubleshoot > Command Prompt).\nFixes 'BOOTMGR is missing', 'Operating System not found', boot loops.\nIf /fixboot says Access is denied, see the UEFI entry.",
+  "tags": [
+   "boot",
+   "bootmgr missing",
+   "wont start",
+   "boot loop",
+   "mbr",
+   "bcd",
+   "no bootable device",
+   "windows ma 3am ye2la3"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Fix boot on UEFI/GPT PCs (bcdboot)",
+  "cmd": "diskpart\n:: list vol  ->  find the FAT32 ~100MB EFI volume\n:: select vol N\n:: assign letter=S\n:: exit\nbcdboot C:\\Windows /s S: /f UEFI",
+  "desc": "Rebuilds the boot files on the EFI partition. Run from recovery Command Prompt. C: must be the Windows drive (check with  dir C:\\ ; in recovery it may be D:).",
+  "tags": [
+   "uefi boot",
+   "efi",
+   "bcdboot",
+   "boot repair",
+   "gpt",
+   "access denied fixboot"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Check disk from recovery (Windows won't boot)",
+  "cmd": "chkdsk C: /f /r",
+  "desc": "In recovery Command Prompt, letters can change - find Windows with  dir C:\\  dir D:\\ ...",
+  "tags": [
+   "boot",
+   "disk error",
+   "recovery"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Run SFC offline (from recovery)",
+  "cmd": "sfc /scannow /offbootdir=C:\\ /offwindir=C:\\Windows",
+  "desc": "Repairs system files when Windows doesn't boot. Adjust C: to the Windows drive.",
+  "tags": [
+   "sfc offline",
+   "recovery",
+   "boot"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Reset Windows (keep or remove files)",
+  "cmd": "systemreset",
+  "desc": "Opens 'Reset this PC'. You can keep personal files. Cloud download reinstalls a fresh Windows.",
+  "example": "systemreset -cleanpc",
+  "tags": [
+   "reset",
+   "reinstall",
+   "factory reset",
+   "format windows"
+  ]
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Re-register Windows Store apps (Start menu / apps broken)",
+  "cmd": "powershell -ExecutionPolicy Bypass -Command \"Get-AppXPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register \\\"$($_.InstallLocation)\\AppXManifest.xml\\\"}\"",
+  "desc": "Re-registers built-in apps. Fixes Start menu, Settings, Calculator or Store apps not opening. Errors in red for some apps are normal.",
+  "tags": [
+   "start menu not working",
+   "apps not opening",
+   "store",
+   "settings not opening"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Reset Microsoft Store",
+  "cmd": "wsreset",
+  "desc": "Clears the Store cache. Fixes Store not loading / downloads stuck.",
+  "tags": [
+   "store",
+   "microsoft store",
+   "wsreset"
+  ]
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Rebuild icon cache (wrong / blank icons)",
+  "cmd": "ie4uinit.exe -show\ntaskkill /f /im explorer.exe\ndel /a /q %localappdata%\\IconCache.db\ndel /a /f /q %localappdata%\\Microsoft\\Windows\\Explorer\\iconcache*\nstart explorer.exe",
+  "desc": "Fixes white/blank/wrong icons on desktop and Explorer.",
+  "tags": [
+   "icons",
+   "blank icons",
+   "white icons",
+   "icon cache"
+  ]
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Fix printer stuck queue (Print Spooler)",
+  "cmd": "net stop spooler\ndel /q /f /s %systemroot%\\System32\\spool\\PRINTERS\\*\nnet start spooler",
+  "desc": "Clears stuck print jobs and restarts the spooler. Fixes 'printer offline' / jobs stuck / can't delete document.",
+  "tags": [
+   "printer",
+   "print",
+   "spooler",
+   "stuck",
+   "printer offline",
+   "tab3a"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Windows Memory Diagnostic (test RAM)",
+  "cmd": "mdsched",
+  "desc": "Restarts and tests your RAM. Good for random blue screens and crashes.",
+  "tags": [
+   "ram test",
+   "memory test",
+   "blue screen",
+   "bsod"
+  ]
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Device Manager",
+  "cmd": "devmgmt.msc",
+  "desc": "Opens Device Manager - yellow ! = driver problem. Right-click > Update / Uninstall driver.",
+  "tags": [
+   "device manager",
+   "drivers",
+   "unknown device",
+   "yellow"
+  ]
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Rescan / reinstall devices",
+  "cmd": "pnputil /scan-devices",
+  "desc": "Scans for hardware changes (like Device Manager > Scan). pnputil /enum-devices /problem lists devices with problems.",
+  "example": "pnputil /enum-devices /problem\npnputil /enum-drivers",
+  "tags": [
+   "drivers",
+   "pnputil",
+   "device not working"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Event Viewer (see why something crashed)",
+  "cmd": "eventvwr.msc",
+  "desc": "Windows Logs > System / Application. Look for red Errors at the time of the problem.",
+  "example": "wevtutil qe System /c:20 /rd:true /f:text /q:\"*[System[(Level=1 or Level=2)]]\"   :: last 20 errors",
+  "tags": [
+   "event viewer",
+   "logs",
+   "crash",
+   "why"
+  ]
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Reliability Monitor (crash history)",
+  "cmd": "perfmon /rel",
+  "desc": "Easy timeline of crashes, failed updates and errors.",
+  "tags": [
+   "crash history",
+   "reliability",
+   "app crash"
+  ]
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Group Policy reset",
+  "cmd": "rd /s /q \"%windir%\\System32\\GroupPolicy\" & rd /s /q \"%windir%\\System32\\GroupPolicyUsers\" & gpupdate /force",
+  "desc": "Resets local group policies to default (fixes 'Some settings are managed by your organization' on home PCs).",
+  "tags": [
+   "managed by your organization",
+   "group policy",
+   "gpedit"
+  ],
+  "admin": true,
+  "danger": true
+ },
+ {
+  "cat": "Windows Repair",
+  "title": "Update group policy",
+  "cmd": "gpupdate /force",
+  "desc": "Applies group policy changes now.",
+  "tags": [
+   "gpupdate",
+   "policy"
+  ]
+ },
+ {
+  "cat": "Windows Update",
+  "title": "Reset Windows Update (stuck / failing updates)",
+  "cmd": "net stop wuauserv\nnet stop cryptSvc\nnet stop bits\nnet stop msiserver\nren C:\\Windows\\SoftwareDistribution SoftwareDistribution.old\nren C:\\Windows\\System32\\catroot2 catroot2.old\nnet start wuauserv\nnet start cryptSvc\nnet start bits\nnet start msiserver",
+  "desc": "Resets the update cache. Fixes updates stuck at 0% / downloading forever, and most errors like 0x80070002, 0x8024a105, 0x80073712, 0x800f0922. Restart and try updating again.",
+  "tags": [
+   "windows update",
+   "stuck",
+   "update failed",
+   "0x80070002",
+   "0x8024",
+   "softwaredistribution",
+   "update error"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Windows Update",
+  "title": "Check for updates from CMD",
+  "cmd": "usoclient StartInteractiveScan",
+  "desc": "Opens a check for updates. Or: start ms-settings:windowsupdate",
+  "example": "start ms-settings:windowsupdate",
+  "tags": [
+   "check updates"
+  ]
+ },
+ {
+  "cat": "Windows Update",
+  "title": "Uninstall a bad update",
+  "cmd": "wusa /uninstall /kb:<number>",
+  "desc": "Removes an update that caused problems. Find the KB number with  wmic qfe list brief.",
+  "example": "wusa /uninstall /kb:5034441",
+  "tags": [
+   "uninstall update",
+   "bad update",
+   "kb"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Windows Update",
+  "title": "Update all programs at once (winget)",
+  "cmd": "winget upgrade --all",
+  "desc": "Updates all apps that winget knows. winget upgrade shows what's available.",
+  "example": "winget upgrade\nwinget upgrade --all --include-unknown",
+  "tags": [
+   "update programs",
+   "upgrade apps",
+   "winget"
+  ]
+ },
+ {
+  "cat": "Windows Update",
+  "title": "Install a program from CMD (winget)",
+  "cmd": "winget install <name>",
+  "desc": "Searches and installs programs from the official Windows package manager.",
+  "example": "winget search vlc\nwinget install VideoLAN.VLC\nwinget install Google.Chrome\nwinget uninstall <name>",
+  "tags": [
+   "install",
+   "winget",
+   "download program",
+   "package manager"
+  ]
+ },
+ {
+  "cat": "Security & Antivirus",
+  "title": "Windows Defender quick scan",
+  "cmd": "\"%ProgramFiles%\\Windows Defender\\MpCmdRun.exe\" -Scan -ScanType 1",
+  "desc": "ScanType 1 = quick, 2 = full. Update signatures with -SignatureUpdate.",
+  "example": "\"%ProgramFiles%\\Windows Defender\\MpCmdRun.exe\" -SignatureUpdate\n\"%ProgramFiles%\\Windows Defender\\MpCmdRun.exe\" -Scan -ScanType 2",
+  "tags": [
+   "virus scan",
+   "defender",
+   "antivirus",
+   "malware",
+   "virus"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Security & Antivirus",
+  "title": "Offline Defender scan (stubborn viruses)",
+  "cmd": "powershell \"Start-MpWDOScan\"",
+  "desc": "Restarts and scans before Windows loads - removes rootkits & hard-to-remove malware. Save your work first!",
+  "tags": [
+   "offline scan",
+   "rootkit",
+   "virus won't delete"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Security & Antivirus",
+  "title": "Malicious Software Removal Tool",
+  "cmd": "mrt",
+  "desc": "Microsoft's built-in malware removal tool.",
+  "tags": [
+   "malware",
+   "virus removal",
+   "mrt"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Security & Antivirus",
+  "title": "Check digital signature of a file",
+  "cmd": "powershell \"Get-AuthenticodeSignature \\\"<file>\\\"\"",
+  "desc": "Shows if an exe is signed by a trusted publisher.",
+  "tags": [
+   "signature",
+   "signed",
+   "trust",
+   "fake program"
+  ]
+ },
+ {
+  "cat": "Security & Antivirus",
+  "title": "Unblock a downloaded file",
+  "cmd": "powershell \"Unblock-File -Path \\\"<file>\\\"\"",
+  "desc": "Removes the 'This file came from another computer' block.",
+  "tags": [
+   "blocked file",
+   "unblock",
+   "smartscreen"
+  ]
+ },
+ {
+  "cat": "Security & Antivirus",
+  "title": "BitLocker status",
+  "cmd": "manage-bde -status",
+  "desc": "Shows drive encryption status. Find your recovery key at aka.ms/myrecoverykey (Microsoft account).",
+  "example": "manage-bde -protectors -get C:",
+  "tags": [
+   "bitlocker",
+   "encryption",
+   "recovery key"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Security & Antivirus",
+  "title": "Securely wipe free space",
+  "cmd": "cipher /w:C:\\",
+  "desc": "Overwrites deleted data so it can't be recovered (takes long). Your existing files are NOT touched.",
+  "tags": [
+   "wipe",
+   "secure delete",
+   "privacy"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Control Panel",
+  "cmd": "start control",
+  "desc": "Opens Control Panel. You can also type  control  in Win+R.",
+  "tags": [
+   "control panel",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Programs and Features (uninstall programs)",
+  "cmd": "start appwiz.cpl",
+  "desc": "Opens Programs and Features (uninstall programs). You can also type  appwiz.cpl  in Win+R.",
+  "tags": [
+   "uninstall",
+   "programs",
+   "remove app",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "System Properties (environment variables, PC name, restore)",
+  "cmd": "start sysdm.cpl",
+  "desc": "Opens System Properties (environment variables, PC name, restore). You can also type  sysdm.cpl  in Win+R.",
+  "tags": [
+   "environment variables",
+   "system properties",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "System Configuration (boot options, safe mode)",
+  "cmd": "start msconfig",
+  "desc": "Opens System Configuration (boot options, safe mode). You can also type  msconfig  in Win+R.",
+  "tags": [
+   "msconfig",
+   "boot",
+   "safe mode",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Registry Editor",
+  "cmd": "start regedit",
+  "desc": "Opens Registry Editor. You can also type  regedit  in Win+R.",
+  "tags": [
+   "registry",
+   "regedit",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Group Policy Editor (Pro)",
+  "cmd": "start gpedit.msc",
+  "desc": "Opens Group Policy Editor (Pro). You can also type  gpedit.msc  in Win+R.",
+  "tags": [
+   "group policy",
+   "gpedit",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Computer Management",
+  "cmd": "start compmgmt.msc",
+  "desc": "Opens Computer Management. You can also type  compmgmt.msc  in Win+R.",
+  "tags": [
+   "computer management",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Task Scheduler",
+  "cmd": "start taskschd.msc",
+  "desc": "Opens Task Scheduler. You can also type  taskschd.msc  in Win+R.",
+  "tags": [
+   "scheduler",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Windows Firewall",
+  "cmd": "start firewall.cpl",
+  "desc": "Opens Windows Firewall. You can also type  firewall.cpl  in Win+R.",
+  "tags": [
+   "firewall",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Firewall advanced settings",
+  "cmd": "start wf.msc",
+  "desc": "Opens Firewall advanced settings. You can also type  wf.msc  in Win+R.",
+  "tags": [
+   "firewall rules",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Sound settings (playback devices)",
+  "cmd": "start mmsys.cpl",
+  "desc": "Opens Sound settings (playback devices). You can also type  mmsys.cpl  in Win+R.",
+  "tags": [
+   "sound",
+   "audio",
+   "speakers",
+   "microphone",
+   "no sound",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Mouse settings",
+  "cmd": "start main.cpl",
+  "desc": "Opens Mouse settings. You can also type  main.cpl  in Win+R.",
+  "tags": [
+   "mouse",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Power Options",
+  "cmd": "start powercfg.cpl",
+  "desc": "Opens Power Options. You can also type  powercfg.cpl  in Win+R.",
+  "tags": [
+   "power",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Internet Options (proxy, reset IE settings)",
+  "cmd": "start inetcpl.cpl",
+  "desc": "Opens Internet Options (proxy, reset IE settings). You can also type  inetcpl.cpl  in Win+R.",
+  "tags": [
+   "internet options",
+   "proxy",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Display settings",
+  "cmd": "start desk.cpl",
+  "desc": "Opens Display settings. You can also type  desk.cpl  in Win+R.",
+  "tags": [
+   "display",
+   "resolution",
+   "screen",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Date and Time",
+  "cmd": "start timedate.cpl",
+  "desc": "Opens Date and Time. You can also type  timedate.cpl  in Win+R.",
+  "tags": [
+   "date",
+   "time",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Region / language format",
+  "cmd": "start intl.cpl",
+  "desc": "Opens Region / language format. You can also type  intl.cpl  in Win+R.",
+  "tags": [
+   "region",
+   "language",
+   "format",
+   "arabic numbers",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Resource Monitor (detailed CPU, disk, network)",
+  "cmd": "start resmon",
+  "desc": "Opens Resource Monitor (detailed CPU, disk, network). You can also type  resmon  in Win+R.",
+  "tags": [
+   "resource monitor",
+   "performance",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Performance Monitor",
+  "cmd": "start perfmon",
+  "desc": "Opens Performance Monitor. You can also type  perfmon  in Win+R.",
+  "tags": [
+   "performance",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "On-Screen Keyboard",
+  "cmd": "start osk",
+  "desc": "Opens On-Screen Keyboard. You can also type  osk  in Win+R.",
+  "tags": [
+   "keyboard",
+   "on screen keyboard",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Snipping Tool (screenshot)",
+  "cmd": "start snippingtool",
+  "desc": "Opens Snipping Tool (screenshot). You can also type  snippingtool  in Win+R.",
+  "tags": [
+   "screenshot",
+   "snip",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Character Map",
+  "cmd": "start charmap",
+  "desc": "Opens Character Map. You can also type  charmap  in Win+R.",
+  "tags": [
+   "symbols",
+   "characters",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Calculator",
+  "cmd": "start calc",
+  "desc": "Opens Calculator. You can also type  calc  in Win+R.",
+  "tags": [
+   "calculator",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Notepad",
+  "cmd": "start notepad",
+  "desc": "Opens Notepad. You can also type  notepad  in Win+R.",
+  "tags": [
+   "notepad",
+   "text",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Paint",
+  "cmd": "start mspaint",
+  "desc": "Opens Paint. You can also type  mspaint  in Win+R.",
+  "tags": [
+   "paint",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Disk Cleanup",
+  "cmd": "start cleanmgr",
+  "desc": "Opens Disk Cleanup. You can also type  cleanmgr  in Win+R.",
+  "tags": [
+   "cleanup",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Settings app",
+  "cmd": "start ms-settings:",
+  "desc": "Opens Settings app. You can also type  ms-settings:  in Win+R.",
+  "tags": [
+   "settings",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Startup folder",
+  "cmd": "start shell:startup",
+  "desc": "Opens Startup folder. You can also type  shell:startup  in Win+R.",
+  "tags": [
+   "startup folder",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "AppData Roaming folder",
+  "cmd": "start \"\" \"%appdata%\"",
+  "desc": "Opens AppData Roaming folder. You can also type  %appdata%  in Win+R.",
+  "tags": [
+   "appdata",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Quick Open (Win+R)",
+  "title": "Temp folder",
+  "cmd": "start \"\" \"%temp%\"",
+  "desc": "Opens Temp folder. You can also type  %temp%  in Win+R.",
+  "tags": [
+   "temp",
+   "temporary files",
+   "win+r",
+   "run",
+   "open"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "'xxx' is not recognized as an internal or external command",
+  "cmd": "where <command>",
+  "desc": "CMD can't find the program.\n1. Check spelling.\n2. The program isn't installed, or its folder isn't in PATH. Run  where <name>  - if nothing is found, add the program's folder to PATH (see 'Add a folder to PATH') and open a NEW CMD window.\n3. For python/node/git: reinstall and tick 'Add to PATH'.\n4. Some tools must be run from their own folder: cd into it first.",
+  "example": "where python\necho %PATH%",
+  "tags": [
+   "not recognized",
+   "internal or external command",
+   "operable program",
+   "command not found",
+   "path"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Access is denied",
+  "cmd": "",
+  "desc": "1. Run CMD as Administrator (Win+R, cmd, Ctrl+Shift+Enter).\n2. File in use: close the program using it (or restart).\n3. File owned by another user: take ownership:\n     takeown /f \"<path>\" /r /d y\n     icacls \"<path>\" /grant %USERNAME%:F /t\n4. Antivirus may be blocking it.\n5. File is read-only:  attrib -r \"<path>\"",
+  "tags": [
+   "access denied",
+   "permission denied",
+   "not allowed",
+   "administrator",
+   "error 5"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "The system cannot find the path specified / file specified",
+  "cmd": "dir \"<path>\"",
+  "desc": "The folder or file doesn't exist where you said.\n- Paths with spaces MUST be in quotes: cd \"C:\\Program Files\"\n- Check the drive letter and spelling with  dir\n- Use  cd /d  when changing to another drive.",
+  "tags": [
+   "cannot find the path",
+   "path not found",
+   "file not found",
+   "error 2",
+   "error 3"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "The process cannot access the file because it is being used by another process",
+  "cmd": "",
+  "desc": "Another program has the file open.\n1. Close programs that might use it (Word, Explorer preview pane, game launcher...).\n2. Find the program: Resource Monitor (resmon) > CPU > 'Associated Handles' > search the file name.\n3. Kill it with taskkill /im <name> /f, or restart the PC.",
+  "example": "resmon\ntaskkill /im <name.exe> /f",
+  "tags": [
+   "file in use",
+   "being used by another process",
+   "locked file",
+   "cannot delete"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "File / folder name too long (can't delete or copy)",
+  "cmd": "robocopy \"C:\\Empty\" \"<long folder>\" /purge\nrmdir \"<long folder>\"",
+  "desc": "Trick: create an empty folder C:\\Empty, then mirror it onto the long folder with robocopy /purge which deletes everything inside, then delete the folder.\nTo allow long paths permanently (Windows 10+):\n  reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem /v LongPathsEnabled /t REG_DWORD /d 1 /f",
+  "example": "mkdir C:\\Empty\nrobocopy C:\\Empty \"D:\\very\\long\\folder\" /purge\nrmdir \"D:\\very\\long\\folder\"",
+  "tags": [
+   "path too long",
+   "long path",
+   "filename too long",
+   "cannot delete folder"
+  ],
+  "danger": true
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Can't delete a file / folder (stubborn)",
+  "cmd": "del /f /q \"\\\\?\\<full path>\"",
+  "desc": "1. Close programs, restart Explorer.\n2. Take ownership (takeown + icacls).\n3. Use \\\\?\\ prefix for weird names (ending with space or dot).\n4. Delete in Safe Mode.\n5. Run chkdsk if Windows says the file is corrupted.",
+  "example": "rmdir /s /q \"\\\\?\\C:\\bad folder. \"",
+  "tags": [
+   "cannot delete",
+   "can't delete",
+   "undeletable",
+   "stubborn file"
+  ],
+  "danger": true
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "No internet / 'Connected, no internet' / limited",
+  "cmd": "netsh winsock reset\nnetsh int ip reset\nipconfig /release\nipconfig /renew\nipconfig /flushdns",
+  "desc": "Step by step:\n1. Restart router and PC.\n2. ping 192.168.1.1 (router) - fails = problem between PC and router (cable/Wi-Fi/driver).\n3. ping 8.8.8.8 - fails = router/ISP has no internet.\n4. ping google.com fails but 8.8.8.8 works = DNS problem -> change DNS to 8.8.8.8 and flushdns.\n5. Run the reset commands (as admin), restart.\n6. Update/reinstall network driver in Device Manager.\n7. Disable VPN / proxy (inetcpl.cpl > Connections > LAN settings).",
+  "tags": [
+   "no internet",
+   "internet ma 3am yemshi",
+   "connected no internet",
+   "limited connectivity",
+   "wifi problem",
+   "net"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "DNS_PROBE_FINISHED_NXDOMAIN / DNS server not responding",
+  "cmd": "ipconfig /flushdns\nnetsh interface ip set dns name=\"Wi-Fi\" static 8.8.8.8\nipconfig /registerdns",
+  "desc": "The DNS can't find the site. Flush DNS and switch to Google (8.8.8.8) or Cloudflare (1.1.1.1). Replace \"Wi-Fi\" with \"Ethernet\" if wired. Also restart the 'DNS Client' service by rebooting.",
+  "tags": [
+   "dns_probe",
+   "nxdomain",
+   "dns server not responding",
+   "err_name_not_resolved",
+   "site not loading"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "IP address starts with 169.254 (APIPA)",
+  "cmd": "ipconfig /release\nipconfig /renew",
+  "desc": "The PC didn't get an IP from the router (DHCP). Restart the router, check cable/Wi-Fi password, run release/renew, then the full network reset.",
+  "tags": [
+   "169.254",
+   "no ip",
+   "dhcp",
+   "apipa",
+   "unidentified network"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Blue Screen (BSOD) - find the cause",
+  "cmd": "dir C:\\Windows\\Minidump",
+  "desc": "1. Note the STOP CODE on the blue screen (e.g. IRQL_NOT_LESS_OR_EQUAL, MEMORY_MANAGEMENT, CRITICAL_PROCESS_DIED) and search it here.\n2. Event Viewer > System > 'BugCheck' events.\n3. Dump files are in C:\\Windows\\Minidump (open with WinDbg or BlueScreenView).\n4. General fixes: update drivers (GPU, chipset, Wi-Fi), run  sfc /scannow  + DISM, test RAM (mdsched), chkdsk, uninstall recently installed programs/updates, check overheating.",
+  "tags": [
+   "blue screen",
+   "bsod",
+   "crash",
+   "stop code",
+   "restart by itself",
+   "minidump",
+   "shasha zar2a"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "BSOD: MEMORY_MANAGEMENT / PAGE_FAULT_IN_NONPAGED_AREA",
+  "cmd": "mdsched",
+  "desc": "Usually RAM or driver problem. Run Windows Memory Diagnostic (mdsched), reseat RAM sticks, disable XMP/overclock in BIOS, update drivers, run sfc /scannow.",
+  "tags": [
+   "memory_management",
+   "page_fault",
+   "ram",
+   "bsod"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "BSOD: IRQL_NOT_LESS_OR_EQUAL / DRIVER_IRQL_NOT_LESS_OR_EQUAL",
+  "cmd": "driverquery /v",
+  "desc": "A driver is misbehaving. The blue screen may name a .sys file - search it to find the driver (e.g. nvlddmkm.sys = NVIDIA, rt640x64.sys = Realtek LAN). Update or roll back that driver. Also check RAM.",
+  "tags": [
+   "irql",
+   "driver_irql",
+   "bsod",
+   "sys file"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "BSOD: CRITICAL_PROCESS_DIED / SYSTEM_SERVICE_EXCEPTION",
+  "cmd": "DISM /Online /Cleanup-Image /RestoreHealth\nsfc /scannow\nchkdsk C: /f /r",
+  "desc": "Often corrupted system files, bad driver or failing disk. Run DISM + SFC + chkdsk, update drivers, uninstall recent updates.",
+  "tags": [
+   "critical_process_died",
+   "system_service_exception",
+   "bsod"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "BSOD: INACCESSIBLE_BOOT_DEVICE",
+  "cmd": "",
+  "desc": "Windows can't read its boot disk.\n1. In BIOS check SATA mode (AHCI vs RAID/IDE) - change it back if you changed it.\n2. Boot recovery > Uninstall latest update.\n3. Recovery Command Prompt: chkdsk C: /f, then bootrec / bcdboot commands.\n4. Check disk cables / disk health.",
+  "tags": [
+   "inaccessible_boot_device",
+   "boot",
+   "bsod",
+   "ahci"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "BSOD: VIDEO_TDR_FAILURE / screen goes black then recovers",
+  "cmd": "",
+  "desc": "Graphics driver crash. Clean-reinstall the GPU driver (use DDU in Safe Mode), remove GPU overclock, check GPU temperature and power cables.",
+  "tags": [
+   "video_tdr",
+   "nvlddmkm",
+   "atikmpag",
+   "graphics crash",
+   "black screen",
+   "gpu"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Automatic Repair loop / 'Your PC did not start correctly'",
+  "cmd": "bootrec /rebuildbcd\nchkdsk C: /f\nsfc /scannow /offbootdir=C:\\ /offwindir=C:\\Windows",
+  "desc": "Advanced options > Command Prompt. Find your Windows drive (dir C:\\, dir D:\\). Run chkdsk, offline sfc, boot repair. Or Advanced options > Uninstall Updates / System Restore.\nTo disable the auto-repair loop:  bcdedit /set {default} recoveryenabled no",
+  "tags": [
+   "automatic repair",
+   "boot loop",
+   "did not start correctly",
+   "preparing automatic repair",
+   "srttrail"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "BOOTMGR is missing / Operating system not found",
+  "cmd": "bootrec /fixmbr\nbootrec /fixboot\nbootrec /rebuildbcd",
+  "desc": "1. Remove USB sticks / DVDs and check BIOS boot order.\n2. Boot from a Windows USB > Repair your computer > Command Prompt and run the commands.\n3. On UEFI PCs use bcdboot (see 'Fix boot on UEFI').",
+  "tags": [
+   "bootmgr missing",
+   "operating system not found",
+   "no bootable device",
+   "boot"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Windows Update error 0x80070002 / 0x80070003 / 0x8024xxxx",
+  "cmd": "net stop wuauserv\nnet stop bits\nren C:\\Windows\\SoftwareDistribution SoftwareDistribution.old\nnet start wuauserv\nnet start bits",
+  "desc": "Corrupted update cache. Reset it (see 'Reset Windows Update'), then run DISM + sfc, check date/time is correct, and free up disk space (at least 20 GB).",
+  "tags": [
+   "0x80070002",
+   "0x80070003",
+   "0x8024",
+   "update error",
+   "windows update failed"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Windows Update error 0x800f0922 / 0x800f081f / 0x80073712",
+  "cmd": "DISM /Online /Cleanup-Image /RestoreHealth\nsfc /scannow",
+  "desc": "Component store is damaged or System Reserved partition is full. Run DISM + SFC, disable VPN, make sure .NET Framework is enabled, then retry. Use the Windows Update Assistant / Media Creation Tool to do an in-place upgrade if it still fails (keeps files & apps).",
+  "tags": [
+   "0x800f0922",
+   "0x800f081f",
+   "0x80073712",
+   "update failed"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Error 0xc000007b - application was unable to start correctly",
+  "cmd": "sfc /scannow",
+  "desc": "Missing/mixed 32/64-bit DLLs. Install/repair all Microsoft Visual C++ Redistributables (x86 AND x64), DirectX End-User Runtime and .NET Framework, then reinstall the program.",
+  "example": "winget install Microsoft.VCRedist.2015+.x64\nwinget install Microsoft.VCRedist.2015+.x86",
+  "tags": [
+   "0xc000007b",
+   "unable to start correctly",
+   "game won't start",
+   "vcredist"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "MSVCP140.dll / VCRUNTIME140.dll / xxx.dll is missing",
+  "cmd": "winget install Microsoft.VCRedist.2015+.x64\nwinget install Microsoft.VCRedist.2015+.x86",
+  "desc": "Install the Visual C++ Redistributable (both x64 and x86). For d3dx9_xx.dll install DirectX End-User Runtime. Never download single DLLs from random sites.",
+  "tags": [
+   "dll missing",
+   "msvcp140",
+   "vcruntime140",
+   "msvcr",
+   "d3dx9",
+   "api-ms-win",
+   "dll not found"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Error 0x80070005 (access denied in installers/updates)",
+  "cmd": "",
+  "desc": "Permissions problem. Run the installer as Administrator, temporarily disable antivirus, make sure the account is admin, and check date/time. For update errors reset Windows Update.",
+  "tags": [
+   "0x80070005",
+   "access denied",
+   "installer"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "'Windows protected your PC' (SmartScreen)",
+  "cmd": "",
+  "desc": "Windows blocks unknown programs. If you trust the file: click 'More info' > 'Run anyway'. Or right-click file > Properties > tick 'Unblock'. Only do this for files you trust!",
+  "tags": [
+   "smartscreen",
+   "windows protected your pc",
+   "unrecognized app",
+   "blocked"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "'This app can't run on your PC'",
+  "cmd": "",
+  "desc": "Usually a 32/64-bit or ARM mismatch, or the file is corrupt/incomplete. Download the correct version for your system (check: systeminfo | findstr Type), re-download the file.",
+  "example": "systeminfo | findstr /c:\"System Type\"",
+  "tags": [
+   "this app can't run on your pc",
+   "32 bit",
+   "64 bit",
+   "incompatible"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "PowerShell: running scripts is disabled on this system",
+  "cmd": "powershell Set-ExecutionPolicy -Scope CurrentUser RemoteSigned",
+  "desc": "Allows running local .ps1 scripts for your user. Or run one script with: powershell -ExecutionPolicy Bypass -File script.ps1",
+  "tags": [
+   "execution policy",
+   "scripts disabled",
+   "ps1",
+   "cannot be loaded"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Not enough disk space / C: drive full",
+  "cmd": "cleanmgr /d C:",
+  "desc": "1. Disk Cleanup > Clean up system files.\n2. del /s /q %TEMP%\\*\n3. powercfg /h off (removes hiberfil.sys)\n4. DISM /Online /Cleanup-Image /StartComponentCleanup\n5. Empty Recycle Bin, Downloads.\n6. Find big folders: Settings > System > Storage.",
+  "tags": [
+   "disk full",
+   "c drive full",
+   "low disk space",
+   "not enough space",
+   "storage full",
+   "el C malyene"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "PC is very slow",
+  "cmd": "",
+  "desc": "1. Task Manager (Ctrl+Shift+Esc) - sort by CPU / Memory / Disk to see what's using it.\n2. Disable startup apps (Task Manager > Startup).\n3. Check disk space, scan for viruses.\n4. sfc /scannow + DISM.\n5. If Disk is at 100% on an HDD - consider an SSD.\n6. Check disk health: wmic diskdrive get status",
+  "tags": [
+   "slow",
+   "slow pc",
+   "lag",
+   "100% disk",
+   "high cpu",
+   "bati2",
+   "t2il"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "100% disk usage",
+  "cmd": "sc stop SysMain\nsc config SysMain start= disabled",
+  "desc": "Common on HDDs. Try: disable SysMain (Superfetch), disable Windows Search indexing temporarily (sc stop WSearch), check for updates running, scan disk health. Real fix: upgrade to SSD.",
+  "tags": [
+   "100% disk",
+   "disk usage",
+   "slow",
+   "sysmain",
+   "superfetch"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "High CPU from 'Antimalware Service Executable'",
+  "cmd": "",
+  "desc": "Windows Defender is scanning. Let it finish, or schedule scans. Adding exclusions for big game/dev folders helps:\n  powershell Add-MpPreference -ExclusionPath \"D:\\Games\"",
+  "tags": [
+   "antimalware service executable",
+   "msmpeng",
+   "high cpu",
+   "defender"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "No sound",
+  "cmd": "net stop audiosrv && net start audiosrv",
+  "desc": "1. Check the right output device (click speaker icon) and volume mixer.\n2. Restart the audio service (command above, as admin).\n3. mmsys.cpl > set default device.\n4. Device Manager > Sound > uninstall driver > restart.\n5. Settings > Sound > Troubleshoot.",
+  "tags": [
+   "no sound",
+   "audio",
+   "sound not working",
+   "speakers",
+   "headphones",
+   "ma fi sawt"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "USB device not recognized",
+  "cmd": "pnputil /scan-devices",
+  "desc": "Try another port/cable, restart PC, Device Manager > Universal Serial Bus controllers > uninstall 'Unknown USB Device' and rescan. Disable USB selective suspend in Power Options.",
+  "tags": [
+   "usb not recognized",
+   "usb not working",
+   "device not recognized",
+   "flash not showing"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "USB / drive shows as RAW or asks to format",
+  "cmd": "chkdsk E: /f",
+  "desc": "Don't format if you need the data! Run chkdsk on it first. If that fails, use recovery software (e.g. TestDisk/PhotoRec) BEFORE formatting.",
+  "tags": [
+   "raw",
+   "needs to be formatted",
+   "you need to format the disk",
+   "usb corrupted"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Start menu / taskbar / search not working",
+  "cmd": "taskkill /f /im explorer.exe & start explorer.exe",
+  "desc": "1. Restart Explorer (command above).\n2. sfc /scannow + DISM.\n3. Re-register apps (see 'Re-register Windows Store apps').\n4. Create a new user account to test.",
+  "tags": [
+   "start menu",
+   "taskbar",
+   "search not working",
+   "windows button"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Keyboard / mouse not working",
+  "cmd": "",
+  "desc": "Try another USB port, check batteries/Bluetooth pairing, Device Manager > uninstall device > restart. For keyboard: Settings > Accessibility > Keyboard - make sure Filter Keys is OFF. Use 'osk' (On-Screen Keyboard) meanwhile.",
+  "tags": [
+   "keyboard not working",
+   "mouse not working",
+   "filter keys",
+   "typing"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Bluetooth not working / missing",
+  "cmd": "net stop bthserv && net start bthserv",
+  "desc": "Restart Bluetooth service, toggle Airplane mode, Device Manager > Bluetooth > update/uninstall driver, run Settings > Troubleshoot > Bluetooth.",
+  "tags": [
+   "bluetooth",
+   "bluetooth missing",
+   "headphones"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Time / date always wrong",
+  "cmd": "net start w32time\nw32tm /resync",
+  "desc": "Syncs the clock with the internet. If it's wrong after every shutdown, the CMOS battery on the motherboard is dead.",
+  "example": "w32tm /config /manualpeerlist:time.windows.com /syncfromflags:manual /update",
+  "tags": [
+   "time wrong",
+   "clock",
+   "date wrong",
+   "sync time",
+   "cmos"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "'Your organization manages some settings' / settings greyed out",
+  "cmd": "gpupdate /force",
+  "desc": "On a home PC this is often left by tweaking tools. See 'Group Policy reset' in Windows Repair.",
+  "tags": [
+   "managed by your organization",
+   "greyed out",
+   "disabled settings"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Windows not activated / activation error",
+  "cmd": "slmgr /dli",
+  "desc": "Check status with slmgr /dli. If you have a valid key:  slmgr /ipk <key>  then  slmgr /ato. If the PC came with Windows, get the BIOS key:  wmic path softwarelicensingservice get OA3xOriginalProductKey.\nAlso: Settings > Activation > Troubleshoot.",
+  "example": "slmgr /ipk XXXXX-XXXXX-XXXXX-XXXXX-XXXXX\nslmgr /ato",
+  "tags": [
+   "activation",
+   "not activated",
+   "activate windows",
+   "0xc004"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Program won't uninstall",
+  "cmd": "winget uninstall <name>",
+  "desc": "Try winget uninstall, appwiz.cpl, or Microsoft's 'Program Install and Uninstall troubleshooter'. As last resort delete its folder and registry leftovers.",
+  "example": "winget list | findstr /i <name>",
+  "tags": [
+   "cannot uninstall",
+   "uninstall failed",
+   "remove program"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Batch script closes immediately",
+  "cmd": "",
+  "desc": "Run it from an open CMD window to see the error, or add  pause  at the end of the .bat file. Check for paths with spaces (use quotes) and use  cd /d \"%~dp0\"  at the top to run from the script's folder.",
+  "tags": [
+   "bat closes",
+   "script closes",
+   "window closes",
+   "batch error"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Arabic / special characters show as ??? in CMD",
+  "cmd": "chcp 65001",
+  "desc": "Switch to UTF-8, and change the CMD font to one that supports Arabic (right-click title bar > Properties > Font). Windows Terminal displays Arabic better.",
+  "tags": [
+   "arabic",
+   "question marks",
+   "encoding",
+   "utf8",
+   "weird characters",
+   "3arabe"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "'The requested operation requires elevation' (error 740)",
+  "cmd": "",
+  "desc": "The command needs Administrator rights. Open CMD as admin (Win+R, cmd, Ctrl+Shift+Enter), or use the 'Run as Admin' button in this program.",
+  "tags": [
+   "requires elevation",
+   "740",
+   "administrator",
+   "admin"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "'Windows cannot access \\\\computer' (network share)",
+  "cmd": "net use",
+  "desc": "Check both PCs are on the same network set to Private, Network discovery and File sharing are ON (control /name Microsoft.NetworkAndSharingCenter > Advanced sharing settings), and the user has permission. Use  \\\\IP\\share  instead of name.",
+  "tags": [
+   "network share",
+   "cannot access",
+   "0x80070035",
+   "network path not found",
+   "smb"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Error 0x80070035 - The network path was not found",
+  "cmd": "sc config lanmanworkstation start= auto\nnet start lanmanworkstation",
+  "desc": "Enable Network discovery & File sharing, make sure the 'Workstation' and 'Server' services are running, and try the IP address instead of the computer name.",
+  "tags": [
+   "0x80070035",
+   "network path not found"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Game / program crashes on start",
+  "cmd": "sfc /scannow",
+  "desc": "Update GPU drivers, install VC++ Redistributables + DirectX, verify game files in Steam/Epic, run as admin, add exception in antivirus, check Event Viewer > Application for the crash module name.",
+  "tags": [
+   "game crash",
+   "crashes",
+   "won't open",
+   "closes immediately"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Screen black after login (only cursor)",
+  "cmd": "",
+  "desc": "Press Ctrl+Shift+Esc > File > Run new task > type  explorer.exe . If it works, run sfc /scannow and check for malware. Win+Ctrl+Shift+B restarts the graphics driver.",
+  "tags": [
+   "black screen",
+   "only cursor",
+   "no desktop",
+   "explorer"
+  ]
+ },
+ {
+  "cat": "Errors & Fixes",
+  "title": "Forgot Windows password (local account)",
+  "cmd": "",
+  "desc": "Microsoft account: reset at account.live.com/password/reset.\nLocal account on your own PC: if another admin account exists, log in there and run:  net user <name> <newpassword>\nOtherwise use the security questions on the login screen or a password-reset disk.",
+  "tags": [
+   "forgot password",
+   "locked out",
+   "password reset",
+   "nesit el password"
+  ]
+ },
+ {
+  "cat": "Batch Scripting (.bat)",
+  "title": "Basic .bat script template",
+  "cmd": "@echo off\ntitle My Script\ncd /d \"%~dp0\"\necho Hello %USERNAME%\npause",
+  "desc": "Save in Notepad as  script.bat  (Save as type: All files). @echo off hides commands, %~dp0 = folder of the script.",
+  "tags": [
+   "batch",
+   "bat file",
+   "script",
+   "template"
+  ]
+ },
+ {
+  "cat": "Batch Scripting (.bat)",
+  "title": "Variables in batch",
+  "cmd": "set name=Ali\necho Hello %name%\nset /a sum=5+3\nset /p answer=Type something: ",
+  "desc": "set = text, set /a = math, set /p = ask the user for input.",
+  "tags": [
+   "variable",
+   "input",
+   "math",
+   "set /p"
+  ]
+ },
+ {
+  "cat": "Batch Scripting (.bat)",
+  "title": "IF conditions",
+  "cmd": "if exist \"file.txt\" (echo found) else (echo missing)\nif \"%answer%\"==\"yes\" echo You said yes\nif %errorlevel% neq 0 echo Last command failed",
+  "desc": "Comparisons: == equ neq lss leq gtr geq. /i ignores case.",
+  "tags": [
+   "if",
+   "condition",
+   "else",
+   "errorlevel"
+  ]
+ },
+ {
+  "cat": "Batch Scripting (.bat)",
+  "title": "FOR loops",
+  "cmd": "for %%f in (*.txt) do echo %%f\nfor /l %%i in (1,1,10) do echo %%i\nfor /r %%f in (*.jpg) do echo %%f\nfor /f \"tokens=*\" %%l in (list.txt) do echo %%l",
+  "desc": "In a .bat use %%f, directly in CMD use %f. /l = numbers, /r = recursive, /f = read file/command output.",
+  "example": "for %f in (*.png) do ren \"%f\" \"img_%f\"",
+  "tags": [
+   "for",
+   "loop",
+   "rename many",
+   "batch rename"
+  ]
+ },
+ {
+  "cat": "Batch Scripting (.bat)",
+  "title": "Labels and GOTO / menus",
+  "cmd": ":menu\ncls\necho 1. Ping Google\necho 2. Exit\nset /p c=Choose: \nif \"%c%\"==\"1\" ping google.com & pause & goto menu\nif \"%c%\"==\"2\" exit",
+  "desc": "Make simple menus with labels and goto. choice  is another way: choice /c 12 /m \"Choose\"",
+  "tags": [
+   "menu",
+   "goto",
+   "label",
+   "choice"
+  ]
+ },
+ {
+  "cat": "Batch Scripting (.bat)",
+  "title": "Run a batch script as admin automatically",
+  "cmd": "net session >nul 2>&1 || (powershell -Command \"Start-Process '%~f0' -Verb RunAs\" & exit /b)",
+  "desc": "Put this at the top of a .bat - it restarts itself as Administrator if needed.",
+  "tags": [
+   "auto admin",
+   "elevate",
+   "runas",
+   "uac"
+  ]
+ },
+ {
+  "cat": "Batch Scripting (.bat)",
+  "title": "Call another script / functions",
+  "cmd": "call other.bat\ncall :myfunc arg1\nexit /b\n:myfunc\necho got %1\nexit /b",
+  "desc": "call runs another batch and comes back. %1 %2 are arguments.",
+  "tags": [
+   "call",
+   "function",
+   "arguments"
+  ]
+ },
+ {
+  "cat": "Batch Scripting (.bat)",
+  "title": "Date-stamped backup folder",
+  "cmd": "set d=%date:~-4%-%date:~3,2%-%date:~0,2%\nrobocopy \"%USERPROFILE%\\Documents\" \"D:\\Backup\\%d%\" /e",
+  "desc": "Creates a folder with the date. The %date% format depends on region settings - check with echo %date%.",
+  "tags": [
+   "backup",
+   "date",
+   "timestamp"
+  ]
+ },
+ {
+  "cat": "PowerShell from CMD",
+  "title": "Run a PowerShell command from CMD",
+  "cmd": "powershell -Command \"<command>\"",
+  "desc": "Runs PowerShell inside CMD. Type  powershell  alone to switch shells, exit to come back.",
+  "example": "powershell \"Get-Process | sort CPU -desc | select -first 10\"",
+  "tags": [
+   "powershell",
+   "ps"
+  ]
+ },
+ {
+  "cat": "PowerShell from CMD",
+  "title": "Top 10 processes by memory",
+  "cmd": "powershell \"Get-Process | sort WS -desc | select -first 10 Name,@{n='MB';e={[int]($_.WS/1MB)}}\"",
+  "desc": "Shows which programs use the most RAM.",
+  "tags": [
+   "memory usage",
+   "ram usage",
+   "top processes"
+  ]
+ },
+ {
+  "cat": "PowerShell from CMD",
+  "title": "Find biggest files on a drive",
+  "cmd": "powershell \"gci C:\\ -r -file -ea 0 | sort Length -desc | select -first 20 FullName,@{n='GB';e={[math]::Round($_.Length/1GB,2)}}\"",
+  "desc": "Lists the 20 largest files (takes a while). Change C:\\ to any folder.",
+  "tags": [
+   "biggest files",
+   "large files",
+   "disk full",
+   "space"
+  ]
+ },
+ {
+  "cat": "PowerShell from CMD",
+  "title": "Get Windows product key / install info",
+  "cmd": "powershell \"Get-ComputerInfo | select WindowsProductName,WindowsVersion,OsArchitecture\"",
+  "desc": "Detailed Windows info.",
+  "tags": [
+   "windows info",
+   "edition",
+   "architecture"
+  ]
+ },
+ {
+  "cat": "Network & Internet",
+  "title": "Wi-Fi passwords of ALL saved networks",
+  "cmd": "for /f \"tokens=2 delims=:\" %a in ('netsh wlan show profiles ^| findstr \"All User\"') do @netsh wlan show profile name=%a key=clear | findstr \"SSID Key\"",
+  "desc": "Shows every saved Wi-Fi name and its password on this PC (paste in CMD directly, not in a .bat).",
+  "tags": [
+   "wifi passwords",
+   "all wifi",
+   "saved passwords"
+  ]
+ }
+]
