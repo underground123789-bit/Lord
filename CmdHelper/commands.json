@@ -3333,5 +3333,1541 @@
    "all wifi",
    "saved passwords"
   ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 1603 - Fatal error during installation",
+  "cmd": "msiexec /i \"<setup.msi>\" /l*v \"%TEMP%\\install.log\"",
+  "desc": "Generic installer failure. Most common causes and fixes:\n1. Run the installer as Administrator.\n2. An older/broken version is installed - uninstall it first (or use Microsoft's 'Program Install and Uninstall troubleshooter').\n3. The install folder is encrypted or on a compressed/removable drive - install to C:\\Program Files.\n4. SYSTEM account lacks permissions on the folder - icacls \"<folder>\" /grant SYSTEM:F /t\n5. Antivirus blocking - disable temporarily.\n6. Make a verbose log (command above) and search it for 'Return value 3' - the lines just above show the real reason.",
+  "example": "findstr /n /c:\"Return value 3\" \"%TEMP%\\install.log\"",
+  "tags": [
+   "1603",
+   "fatal error during installation",
+   "msi",
+   "installer failed",
+   "install error",
+   "setup failed",
+   "msiexec"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 1618 - Another installation is already in progress",
+  "cmd": "taskkill /f /im msiexec.exe\nnet stop msiserver\nnet start msiserver",
+  "desc": "Windows Installer allows only one install at a time. Wait for Windows Update / other installers to finish, or end msiexec and restart the Windows Installer service. Restarting the PC also fixes it.",
+  "tags": [
+   "1618",
+   "0x80070652",
+   "another installation is in progress",
+   "already in progress",
+   "msiexec"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 1619 / 1620 - Installation package could not be opened",
+  "cmd": "",
+  "desc": "The .msi file is missing, blocked or corrupted.\n1. Re-download the installer (download fully, no browser interruption).\n2. Copy it to a local folder like C:\\Install (not a network/USB drive) and run from there.\n3. Right-click > Properties > Unblock.\n4. Check the file hash if the site provides one: certutil -hashfile <file> SHA256",
+  "tags": [
+   "1619",
+   "1620",
+   "package could not be opened",
+   "msi corrupt",
+   "verify that the package exists"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 1625 - Installation forbidden by system policy",
+  "cmd": "reg query HKLM\\Software\\Policies\\Microsoft\\Windows\\Installer",
+  "desc": "A group policy blocks installs. Run as Administrator. On a home PC check the policy key above: if DisableMSI is 1, delete it:\n  reg delete HKLM\\Software\\Policies\\Microsoft\\Windows\\Installer /v DisableMSI /f\nOn a work PC ask IT.",
+  "tags": [
+   "1625",
+   "forbidden by system policy",
+   "system administrator has set policies",
+   "install blocked"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 1638 - Another version of this product is already installed",
+  "cmd": "winget list | findstr /i \"<name>\"",
+  "desc": "Uninstall the existing version first (appwiz.cpl), or use the program's repair option. For Visual C++ redistributables this is usually harmless - the newer version is already present.",
+  "tags": [
+   "1638",
+   "another version already installed",
+   "already installed",
+   "vcredist"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 2502 / 2503 - Installer internal error (Temp folder permissions)",
+  "cmd": "icacls \"%windir%\\Temp\" /grant Everyone:(OI)(CI)F /t\nicacls \"%TEMP%\" /grant %USERNAME%:(OI)(CI)F /t",
+  "desc": "Installer can't write to the Temp folder. Fix permissions (above), or run the .msi from an Administrator CMD:\n  msiexec /i \"C:\\path\\setup.msi\"",
+  "tags": [
+   "2502",
+   "2503",
+   "called runscript when not marked in progress",
+   "internal error",
+   "msi temp"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Windows Installer service could not be accessed / broken",
+  "cmd": "msiexec /unregister\nmsiexec /regserver\nnet stop msiserver\nnet start msiserver",
+  "desc": "Re-registers and restarts the Windows Installer engine. Then run sfc /scannow if it still fails.",
+  "tags": [
+   "windows installer service could not be accessed",
+   "1719",
+   "msiserver",
+   "msi broken",
+   "installer not working"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 1722 / 1723 - Problem with this Windows Installer package (custom action failed)",
+  "cmd": "",
+  "desc": "A script or DLL inside the installer failed. Install/repair the prerequisites (VC++ redistributables, .NET), run as admin, uninstall older versions, and check the verbose log (msiexec /l*v).",
+  "tags": [
+   "1722",
+   "1723",
+   "problem with this windows installer package",
+   "custom action",
+   "dll required"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 1311 / 1335 - Source file not found / cabinet file corrupt",
+  "cmd": "",
+  "desc": "The installation media is damaged or incomplete. Re-download the installer, copy the whole folder to C:\\ before installing, and test RAM (mdsched) if it keeps happening with different installers.",
+  "tags": [
+   "1311",
+   "1335",
+   "source file not found",
+   "cabinet file corrupt",
+   "cab"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 1316 - The specified account already exists",
+  "cmd": "",
+  "desc": "Leftovers of a previous install. Uninstall the program, remove its folder in Program Files, and try again. Microsoft's 'Program Install and Uninstall troubleshooter' cleans broken entries.",
+  "tags": [
+   "1316",
+   "specified account already exists"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 1402 / 1406 - Could not open / write registry key",
+  "cmd": "",
+  "desc": "Run the installer as Administrator. Then give your account full control of the key in regedit (right-click key > Permissions), or run sfc /scannow. Antivirus can also block registry writes.",
+  "tags": [
+   "1402",
+   "1406",
+   "could not open key",
+   "could not write value",
+   "registry permission"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 1500 - Another installation is in progress",
+  "cmd": "taskkill /f /im msiexec.exe",
+  "desc": "Same as 1618: wait or end msiexec.exe, then restart the PC.",
+  "tags": [
+   "1500",
+   "another installation is in progress"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 1920 - Service failed to start (insufficient privileges)",
+  "cmd": "",
+  "desc": "The installer could not start one of its services. Run as admin, temporarily disable antivirus, make sure the account the service runs as exists, and retry. Check Event Viewer > System for the service error.",
+  "tags": [
+   "1920",
+   "service failed to start",
+   "verify that you have sufficient privileges"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 1935 - Assembly component install error",
+  "cmd": "sfc /scannow",
+  "desc": "Usually a broken .NET Framework or Windows Modules Installer. Run DISM + sfc, make sure 'Windows Modules Installer' (TrustedInstaller) service is not disabled, then retry.",
+  "example": "sc config trustedinstaller start= demand\nnet start trustedinstaller",
+  "tags": [
+   "1935",
+   "assembly component",
+   "net framework"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 0x80070643 - Fatal error during installation (updates/.NET/Defender)",
+  "cmd": "DISM /Online /Cleanup-Image /RestoreHealth\nsfc /scannow",
+  "desc": "Same as MSI 1603. For a .NET update: repair .NET with Microsoft's .NET Framework Repair Tool. For Defender definition updates: run MpCmdRun -SignatureUpdate. For KB5034441 (WinRE partition too small) Microsoft explains how to resize the recovery partition - or simply hide the update.",
+  "tags": [
+   "0x80070643",
+   "1603",
+   "fatal error during installation",
+   "update failed",
+   "kb5034441",
+   "net framework"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Install .NET Framework 3.5 (error 0x800F0950 / 0x800F081F / 0x800F0906)",
+  "cmd": "DISM /Online /Enable-Feature /FeatureName:NetFx3 /All",
+  "desc": "Many older programs and games need .NET 3.5. If the download fails, mount a Windows ISO (D: here) and install from it:\n  DISM /Online /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:D:\\sources\\sxs",
+  "tags": [
+   "net framework 3.5",
+   "netfx3",
+   "0x800f0950",
+   "0x800f081f",
+   "0x800f0906",
+   "0x800f0954",
+   "dotnet",
+   ".net"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Install / repair .NET Desktop Runtime ('You must install .NET to run this application')",
+  "cmd": "winget install Microsoft.DotNet.DesktopRuntime.8",
+  "desc": "The app needs a newer .NET runtime. Install the version the message asks for (6, 7, 8...). Check installed ones with:  dotnet --list-runtimes",
+  "example": "dotnet --list-runtimes\nwinget search Microsoft.DotNet",
+  "tags": [
+   "net runtime",
+   "dotnet",
+   "you must install .net",
+   "net core",
+   "desktop runtime"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Install / repair Visual C++ Redistributables (all games/apps)",
+  "cmd": "winget install Microsoft.VCRedist.2015+.x64\nwinget install Microsoft.VCRedist.2015+.x86\nwinget install Microsoft.VCRedist.2013.x64\nwinget install Microsoft.VCRedist.2013.x86",
+  "desc": "Fixes most 'xxx.dll is missing', 0xc000007b and 'side-by-side configuration is incorrect' errors. Install BOTH x64 and x86 even on 64-bit Windows.",
+  "tags": [
+   "vcredist",
+   "visual c++",
+   "redistributable",
+   "dll missing",
+   "side by side",
+   "msvcp",
+   "vcruntime",
+   "msvcr120",
+   "msvcr100"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "'The application has failed to start because its side-by-side configuration is incorrect' (error 14001)",
+  "cmd": "",
+  "desc": "Missing Visual C++ runtime. Install/repair the Visual C++ Redistributables (2005-2022, x86 and x64). Event Viewer > Application > SideBySide errors show exactly which version is needed.",
+  "tags": [
+   "side-by-side configuration is incorrect",
+   "14001",
+   "sxs",
+   "sidebyside",
+   "vcredist"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Install DirectX End-User Runtime (d3dx9_43.dll, xinput1_3.dll, d3dcompiler_43.dll missing)",
+  "cmd": "winget install Microsoft.DirectX",
+  "desc": "Older games need the legacy DirectX 9 files even on Windows 10/11. Install the DirectX End-User Runtime (June 2010) from Microsoft.",
+  "tags": [
+   "directx",
+   "d3dx9",
+   "d3dx9_43.dll",
+   "xinput1_3.dll",
+   "d3dcompiler_43.dll",
+   "x3daudio",
+   "game dll"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Microsoft Store / app install error 0x80073CF3 / 0x80073CF9 / 0x80073D02",
+  "cmd": "wsreset\nsfc /scannow",
+  "desc": "1. wsreset (clears Store cache).\n2. Close the app if it's running (0x80073D02 = app is in use).\n3. Sign out/in to the Store, check date/time.\n4. Re-register the Store: powershell \"Get-AppxPackage -allusers Microsoft.WindowsStore | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register \\\"$($_.InstallLocation)\\AppXManifest.xml\\\"}\"\n5. Make sure there's free disk space.",
+  "tags": [
+   "0x80073cf3",
+   "0x80073cf9",
+   "0x80073d02",
+   "0x80073cfb",
+   "store install error",
+   "appx",
+   "msix",
+   "can't install app"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Can't install .appx / .msix ('App installer' errors, sideloading)",
+  "cmd": "powershell \"Add-AppxPackage -Path \\\"<file.msix>\\\"\"",
+  "desc": "Install with PowerShell to see the real error. Developer mode may be needed: Settings > System > For developers.",
+  "tags": [
+   "appx",
+   "msix",
+   "app installer",
+   "sideload",
+   "add-appxpackage"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "'This installation package is not supported by this processor type'",
+  "cmd": "",
+  "desc": "You downloaded the wrong version (64-bit on 32-bit Windows, or ARM vs x64). Check:  systeminfo | findstr /c:\"System Type\"  and download the matching installer.",
+  "example": "systeminfo | findstr /c:\"System Type\"",
+  "tags": [
+   "not supported by this processor type",
+   "32-bit",
+   "64-bit",
+   "x86",
+   "arm64"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Installer says 'Not enough disk space' but there is space",
+  "cmd": "fsutil volume diskfree C:",
+  "desc": "Installers often extract to C:\\ / %TEMP% even when installing elsewhere. Free up C:, or change TEMP to another drive for that session:\n  set TEMP=D:\\Temp & set TMP=D:\\Temp & setup.exe",
+  "tags": [
+   "not enough space",
+   "insufficient disk space",
+   "installer space",
+   "temp drive"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Setup is blocked / 'Windows protected your PC' / 'unknown publisher'",
+  "cmd": "",
+  "desc": "SmartScreen. If you trust the source: More info > Run anyway, or Properties > Unblock. Only for trusted files!",
+  "tags": [
+   "smartscreen",
+   "unknown publisher",
+   "blocked installer",
+   "protected your pc"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "'You need administrator permission' / UAC prompt doesn't appear",
+  "cmd": "",
+  "desc": "Right-click the installer > Run as administrator. If your account isn't admin, log in as one, or ask the PC's owner. To check: net localgroup administrators",
+  "example": "net localgroup administrators",
+  "tags": [
+   "administrator permission",
+   "uac",
+   "need admin",
+   "run as admin",
+   "elevation"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "'The code execution cannot proceed because xxx.dll was not found'",
+  "cmd": "sfc /scannow",
+  "desc": "Look at the DLL name:\n- msvcp*.dll / vcruntime*.dll / msvcr*.dll / concrt140.dll / mfc140*.dll -> Visual C++ Redistributables\n- d3dx9_*.dll / xinput*.dll / d3dcompiler_*.dll / xaudio*.dll -> DirectX End-User Runtime\n- mscoree.dll / *.NET -> .NET Framework\n- api-ms-win-crt-*.dll -> Windows Update (KB2999226) + VC++ 2015+\n- vulkan-1.dll -> update GPU drivers\n- steam_api.dll / game-specific -> verify/reinstall the game\nNever download single DLLs from DLL websites.",
+  "tags": [
+   "code execution cannot proceed",
+   "dll was not found",
+   "dll missing",
+   "not found",
+   "api-ms-win-crt",
+   "vulkan-1.dll",
+   "steam_api.dll",
+   "mfc140u.dll"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "'The program can't start because xxx.dll is missing from your computer'",
+  "cmd": "",
+  "desc": "Same fix as 'The code execution cannot proceed...'. Identify the DLL family and install the right runtime (VC++ / DirectX / .NET), or reinstall the program.",
+  "tags": [
+   "can't start because",
+   "dll is missing from your computer",
+   "missing dll"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "'The specified module could not be found' (error 126)",
+  "cmd": "",
+  "desc": "A DLL the program needs (or one of ITS dependencies) is missing. Reinstall the program and the VC++ redistributables. For Python packages (import errors) reinstall the package and VC++ runtime.",
+  "tags": [
+   "specified module could not be found",
+   "error 126",
+   "0x8007007e",
+   "module not found",
+   "loadlibrary"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 0xc0000135 - .NET Framework missing",
+  "cmd": "DISM /Online /Enable-Feature /FeatureName:NetFx3 /All",
+  "desc": "'The application was unable to start correctly (0xc0000135)': install .NET Framework 3.5 and 4.8 (and repair with the .NET Repair Tool).",
+  "tags": [
+   "0xc0000135",
+   "unable to start correctly",
+   "net framework missing"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 0xc0000142 / 0xc0000022 - application was unable to start correctly",
+  "cmd": "sfc /scannow",
+  "desc": "DLL initialization failed or permission problem. Run as admin, reinstall VC++ and DirectX runtimes, reinstall the program, run sfc + DISM, check antivirus quarantine. 0xc0000022 = access denied -> check folder permissions.",
+  "tags": [
+   "0xc0000142",
+   "0xc0000022",
+   "unable to start correctly",
+   "dll initialization failed"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 0xc0000005 - Access violation (program crashes)",
+  "cmd": "sfc /scannow",
+  "desc": "The program read memory it shouldn't. Update/reinstall the program, update drivers, disable antivirus temporarily, run sfc + DISM, test RAM with mdsched. If many programs crash with it, suspect RAM or malware.",
+  "tags": [
+   "0xc0000005",
+   "access violation",
+   "exception",
+   "crash",
+   "application error"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Error 0xc000012f / 0xc0000428 - Bad image / invalid signature",
+  "cmd": "sfc /scannow",
+  "desc": "'xxx is either not designed to run on Windows or it contains an error'. Reinstall the program + VC++ redistributables, run sfc/DISM. 0xc0000428 at boot = digital signature issue - try 'Disable driver signature enforcement' in Advanced startup.",
+  "tags": [
+   "0xc000012f",
+   "0xc0000428",
+   "bad image",
+   "not designed to run on windows",
+   "contains an error"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "pip / python / node / git 'is not recognized' after installing",
+  "cmd": "where python\nwhere pip",
+  "desc": "The installer didn't add it to PATH (or CMD was open during install).\n1. Close and reopen CMD.\n2. Python: reinstall and tick 'Add python.exe to PATH', or use  py  and  py -m pip.\n3. Node/Git: reinstall with default options.\n4. Add the folder manually: sysdm.cpl > Advanced > Environment Variables > Path.",
+  "example": "py --version\npy -m pip install requests",
+  "tags": [
+   "python not recognized",
+   "pip not recognized",
+   "node not recognized",
+   "npm",
+   "git not recognized",
+   "java not recognized",
+   "path"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Python opens Microsoft Store instead of running",
+  "cmd": "",
+  "desc": "The 'App execution aliases' for python.exe point to the Store. Settings > Apps > Advanced app settings > App execution aliases > turn OFF python.exe and python3.exe, then install Python from python.org with 'Add to PATH'.",
+  "tags": [
+   "python opens microsoft store",
+   "app execution alias",
+   "python store"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Java: 'java is not recognized' / wrong Java version",
+  "cmd": "where java\njava -version",
+  "desc": "Install a JDK/JRE (winget install EclipseAdoptium.Temurin.21.JRE), then set JAVA_HOME and add %JAVA_HOME%\\bin to PATH. 'where java' shows which one runs first.",
+  "example": "winget install EclipseAdoptium.Temurin.21.JRE\nsetx JAVA_HOME \"C:\\Program Files\\Eclipse Adoptium\\jre-21\"",
+  "tags": [
+   "java",
+   "jdk",
+   "jre",
+   "java_home",
+   "minecraft java"
+  ]
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Uninstall leftovers / force remove a broken program",
+  "cmd": "wmic product where \"name like '%<name>%'\" call uninstall",
+  "desc": "Tries the MSI uninstall directly. If it fails: Microsoft 'Program Install and Uninstall troubleshooter', then delete the folder in Program Files / AppData.",
+  "tags": [
+   "force uninstall",
+   "broken uninstall",
+   "leftovers",
+   "remove program"
+  ],
+  "admin": true,
+  "danger": true
+ },
+ {
+  "cat": "Installation Errors",
+  "title": "Silent install of a program",
+  "cmd": "<setup.exe> /S",
+  "desc": "Common silent switches: /S (NSIS), /VERYSILENT (Inno Setup), /quiet /norestart (MSI: msiexec /i setup.msi /qn), -s. Try  setup.exe /?  to see options.",
+  "example": "msiexec /i setup.msi /qn /norestart\nsetup.exe /VERYSILENT /NORESTART",
+  "tags": [
+   "silent install",
+   "unattended",
+   "quiet install"
+  ]
+ },
+ {
+  "cat": "Windows Install & Upgrade",
+  "title": "'Windows cannot be installed to this disk. The selected disk is of the GPT/MBR partition style'",
+  "cmd": "diskpart",
+  "desc": "The disk style doesn't match boot mode (UEFI needs GPT, Legacy/CSM needs MBR). Either change BIOS boot mode, or convert the disk - THIS ERASES THE DISK:\nPress Shift+F10 in Windows Setup, then:\n  diskpart\n  list disk\n  select disk 0\n  clean\n  convert gpt        (or: convert mbr)\n  exit\nNo data loss alternative from inside Windows:  mbr2gpt /convert /allowFullOS",
+  "example": "mbr2gpt /validate /allowFullOS\nmbr2gpt /convert /allowFullOS",
+  "tags": [
+   "gpt",
+   "mbr",
+   "partition style",
+   "windows cannot be installed to this disk",
+   "setup",
+   "convert gpt",
+   "uefi",
+   "legacy"
+  ],
+  "admin": true,
+  "danger": true
+ },
+ {
+  "cat": "Windows Install & Upgrade",
+  "title": "'We couldn't create a new partition or locate an existing one'",
+  "cmd": "",
+  "desc": "Unplug all other drives and USB sticks except the installation USB, use a USB 2.0 port, and in Setup delete the partitions on the target disk (data loss!) and click 'Next' on the unallocated space. Or use diskpart clean + convert gpt.",
+  "tags": [
+   "couldn't create a new partition",
+   "locate an existing one",
+   "windows setup",
+   "install windows"
+  ]
+ },
+ {
+  "cat": "Windows Install & Upgrade",
+  "title": "'A media driver your computer needs is missing' / no drives shown in Windows Setup",
+  "cmd": "",
+  "desc": "1. Try another USB port (USB 2.0) and re-create the USB with Media Creation Tool or Rufus.\n2. For Intel VMD/RST laptops (no disk shown): download the Intel RST/VMD driver from the laptop maker, put it on the USB, click 'Load driver'. Or disable VMD in BIOS.",
+  "tags": [
+   "media driver missing",
+   "no drives found",
+   "setup can't find disk",
+   "intel rst",
+   "vmd",
+   "load driver"
+  ]
+ },
+ {
+  "cat": "Windows Install & Upgrade",
+  "title": "'This PC can't run Windows 11' (TPM 2.0 / Secure Boot)",
+  "cmd": "tpm.msc",
+  "desc": "Check TPM: tpm.msc (should say 'TPM is ready', version 2.0). Check Secure Boot: msinfo32 > Secure Boot State. Turn ON 'fTPM'/'PTT' and Secure Boot in BIOS (disk must be GPT - see mbr2gpt). Use PC Health Check app for details.",
+  "example": "powershell Get-Tpm\nmsinfo32",
+  "tags": [
+   "windows 11",
+   "tpm",
+   "tpm 2.0",
+   "secure boot",
+   "can't run windows 11",
+   "pc health check",
+   "upgrade"
+  ]
+ },
+ {
+  "cat": "Windows Install & Upgrade",
+  "title": "Windows upgrade error 0xC1900101 (driver problem)",
+  "cmd": "DISM /Online /Cleanup-Image /RestoreHealth\nsfc /scannow",
+  "desc": "A driver blocks the upgrade. Unplug all USB devices except keyboard/mouse, uninstall antivirus, update all drivers (GPU, storage, Wi-Fi), free 25+ GB, disable VPN software, then retry. Logs: C:\\$WINDOWS.~BT\\Sources\\Panther\\setuperr.log",
+  "tags": [
+   "0xc1900101",
+   "upgrade failed",
+   "feature update",
+   "0x20017",
+   "0x30018",
+   "0x4000d",
+   "0x40017",
+   "driver"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Windows Install & Upgrade",
+  "title": "Windows upgrade errors 0xC1900200 / 0xC1900202 / 0x80070070 (requirements / space)",
+  "cmd": "cleanmgr /d C:",
+  "desc": "0xC190020x = PC doesn't meet requirements. 0x80070070 = not enough disk space - free at least 20-30 GB on C:.",
+  "tags": [
+   "0xc1900200",
+   "0xc1900202",
+   "0x80070070",
+   "not enough space upgrade",
+   "requirements"
+  ]
+ },
+ {
+  "cat": "Windows Install & Upgrade",
+  "title": "Windows upgrade error 0xC1900208 (incompatible app)",
+  "cmd": "",
+  "desc": "An incompatible app (often old antivirus) blocks the upgrade. Uninstall third-party antivirus and system tools, then try again. The compatibility report in Setup names the app.",
+  "tags": [
+   "0xc1900208",
+   "incompatible app",
+   "upgrade blocked"
+  ]
+ },
+ {
+  "cat": "Windows Install & Upgrade",
+  "title": "Error 0x8007025D during Windows install (bad USB / RAM)",
+  "cmd": "",
+  "desc": "Setup read corrupted data. Re-create the install USB (different USB stick), use a USB 2.0 port, test RAM (mdsched / remove one stick), and check the target disk.",
+  "tags": [
+   "0x8007025d",
+   "install windows error",
+   "buffer",
+   "usb install"
+  ]
+ },
+ {
+  "cat": "Windows Install & Upgrade",
+  "title": "Error 0x80070570 - The file or directory is corrupted and unreadable",
+  "cmd": "chkdsk C: /f /r",
+  "desc": "During Windows install: re-download the ISO and re-create the USB, test RAM. On a drive: run chkdsk on that drive.",
+  "tags": [
+   "0x80070570",
+   "file or directory is corrupted and unreadable",
+   "corrupted unreadable"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Windows Install & Upgrade",
+  "title": "Create a bootable Windows USB",
+  "cmd": "",
+  "desc": "Use Microsoft's Media Creation Tool (aka.ms/windows11 or Windows 10 download page), or Rufus with an official ISO. USB must be 8 GB+ and will be erased. Boot from it with the boot menu key (F12/F11/F8/Esc depending on brand).",
+  "tags": [
+   "bootable usb",
+   "install windows",
+   "media creation tool",
+   "rufus",
+   "boot from usb",
+   "iso"
+  ]
+ },
+ {
+  "cat": "Windows Install & Upgrade",
+  "title": "In-place upgrade / repair install (keeps files and apps)",
+  "cmd": "",
+  "desc": "Fixes deep Windows problems without losing data: download the Windows ISO (same version), double-click to mount, run setup.exe, choose 'Keep personal files and apps'. Or: Settings > System > Recovery > 'Fix problems using Windows Update' (Windows 11).",
+  "tags": [
+   "repair install",
+   "in-place upgrade",
+   "reinstall keep files",
+   "fix windows without format"
+  ]
+ },
+ {
+  "cat": "Windows Install & Upgrade",
+  "title": "'Undoing changes made to your computer' / 'We couldn't complete the updates'",
+  "cmd": "",
+  "desc": "Let it finish. Then: run the Windows Update reset, DISM + sfc, free disk space, and install the failing KB manually from the Microsoft Update Catalog. If it loops: Advanced startup > Uninstall Updates.",
+  "tags": [
+   "undoing changes",
+   "couldn't complete the updates",
+   "update loop",
+   "failure configuring windows updates"
+  ]
+ },
+ {
+  "cat": "Windows Install & Upgrade",
+  "title": "Stuck on 'Getting Windows ready' / 'Working on updates' / spinning dots",
+  "cmd": "",
+  "desc": "Wait at least 1-2 hours. If nothing changes: hold power to turn off, boot again. If it loops: force-shutdown 3 times during boot to get Recovery > Uninstall Updates / System Restore / Startup Repair.",
+  "tags": [
+   "getting windows ready",
+   "working on updates",
+   "stuck",
+   "spinning dots",
+   "don't turn off your computer"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 1: This device is not configured correctly",
+  "cmd": "devmgmt.msc",
+  "desc": "Update the driver (Device Manager > right-click > Update driver) or install it from the manufacturer.",
+  "tags": [
+   "code 1",
+   "device manager",
+   "yellow exclamation",
+   "driver"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 3: The driver for this device might be corrupted, or your system may be running low on memory",
+  "cmd": "devmgmt.msc",
+  "desc": "Close programs, uninstall the device and reinstall the driver, run sfc /scannow.",
+  "tags": [
+   "code 3",
+   "device manager",
+   "yellow exclamation",
+   "driver"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 10: This device cannot start",
+  "cmd": "devmgmt.msc",
+  "desc": "Update or roll back the driver, install chipset drivers from the PC/motherboard maker, try another USB port. Common for USB, audio, Wi-Fi.",
+  "tags": [
+   "code 10",
+   "device manager",
+   "yellow exclamation",
+   "driver",
+   "cannot start",
+   "usb",
+   "audio",
+   "wifi"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 12: This device cannot find enough free resources",
+  "cmd": "devmgmt.msc",
+  "desc": "Disable devices you don't use, update BIOS, remove recently added hardware.",
+  "tags": [
+   "code 12",
+   "device manager",
+   "yellow exclamation",
+   "driver",
+   "resources",
+   "conflict"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 14: This device cannot work properly until you restart your computer",
+  "cmd": "devmgmt.msc",
+  "desc": "Restart the PC.",
+  "tags": [
+   "code 14",
+   "device manager",
+   "yellow exclamation",
+   "driver",
+   "restart"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 18: Reinstall the drivers for this device",
+  "cmd": "devmgmt.msc",
+  "desc": "Uninstall the device in Device Manager, then Action > Scan for hardware changes.",
+  "tags": [
+   "code 18",
+   "device manager",
+   "yellow exclamation",
+   "driver",
+   "reinstall drivers"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 19: Windows cannot start this hardware device because its configuration information (in the registry) is incomplete or damaged",
+  "cmd": "devmgmt.msc",
+  "desc": "Uninstall the device and restart. For DVD/USB: delete UpperFilters/LowerFilters values for that device class in the registry (backup first!).",
+  "tags": [
+   "code 19",
+   "device manager",
+   "yellow exclamation",
+   "driver",
+   "upperfilters",
+   "lowerfilters",
+   "registry",
+   "dvd drive"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 21: Windows is removing this device",
+  "cmd": "devmgmt.msc",
+  "desc": "Wait and restart.",
+  "tags": [
+   "code 21",
+   "device manager",
+   "yellow exclamation",
+   "driver"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 22: This device is disabled",
+  "cmd": "devmgmt.msc",
+  "desc": "Right-click the device > Enable device.",
+  "tags": [
+   "code 22",
+   "device manager",
+   "yellow exclamation",
+   "driver",
+   "disabled device"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 24: This device is not present, is not working properly, or does not have all its drivers installed",
+  "cmd": "devmgmt.msc",
+  "desc": "Reconnect the device, install the drivers, try another port.",
+  "tags": [
+   "code 24",
+   "device manager",
+   "yellow exclamation",
+   "driver",
+   "not present"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 28: The drivers for this device are not installed",
+  "cmd": "devmgmt.msc",
+  "desc": "Install the driver: Windows Update > Optional updates, or the manufacturer's site. Use the Hardware Ids (Properties > Details) to search the right driver.",
+  "tags": [
+   "code 28",
+   "device manager",
+   "yellow exclamation",
+   "driver",
+   "drivers not installed",
+   "unknown device",
+   "hardware id"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 31: This device is not working properly because Windows cannot load the drivers required",
+  "cmd": "devmgmt.msc",
+  "desc": "Uninstall the device and the driver, restart, install the latest driver.",
+  "tags": [
+   "code 31",
+   "device manager",
+   "yellow exclamation",
+   "driver",
+   "cannot load drivers"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 32: A driver (service) for this device has been disabled",
+  "cmd": "devmgmt.msc",
+  "desc": "Set the driver's service start type back (sc config <service> start= demand) or reinstall the driver.",
+  "tags": [
+   "code 32",
+   "device manager",
+   "yellow exclamation",
+   "driver",
+   "service disabled"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 37: Windows cannot initialize the device driver for this hardware",
+  "cmd": "devmgmt.msc",
+  "desc": "Uninstall and reinstall the driver.",
+  "tags": [
+   "code 37",
+   "device manager",
+   "yellow exclamation",
+   "driver"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 38: Windows cannot load the device driver because a previous instance is still in memory",
+  "cmd": "devmgmt.msc",
+  "desc": "Restart the PC.",
+  "tags": [
+   "code 38",
+   "device manager",
+   "yellow exclamation",
+   "driver"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 39: Windows cannot load the device driver. The driver may be corrupted or missing",
+  "cmd": "devmgmt.msc",
+  "desc": "Uninstall the device, delete the driver, reinstall. For DVD drives remove UpperFilters/LowerFilters.",
+  "tags": [
+   "code 39",
+   "device manager",
+   "yellow exclamation",
+   "driver",
+   "driver corrupted",
+   "missing driver"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 41: Windows successfully loaded the device driver but cannot find the hardware device",
+  "cmd": "devmgmt.msc",
+  "desc": "Reinstall the driver; check the hardware connection.",
+  "tags": [
+   "code 41",
+   "device manager",
+   "yellow exclamation",
+   "driver"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 43: Windows has stopped this device because it has reported problems",
+  "cmd": "devmgmt.msc",
+  "desc": "Very common for USB devices and GPUs. Unplug/replug, try another port/cable, uninstall the device and reboot, update chipset/GPU drivers, disable USB selective suspend. For a GPU code 43 = clean driver reinstall (DDU) or possible hardware failure.",
+  "tags": [
+   "code 43",
+   "device manager",
+   "yellow exclamation",
+   "driver",
+   "usb device not recognized",
+   "gpu",
+   "nvidia",
+   "device descriptor request failed"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 45: Currently, this hardware device is not connected to the computer",
+  "cmd": "devmgmt.msc",
+  "desc": "Reconnect the device. Old 'ghost' entries can be ignored.",
+  "tags": [
+   "code 45",
+   "device manager",
+   "yellow exclamation",
+   "driver",
+   "not connected"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 48: The software for this device has been blocked from starting because it is known to have problems",
+  "cmd": "devmgmt.msc",
+  "desc": "Get an updated driver from the manufacturer.",
+  "tags": [
+   "code 48",
+   "device manager",
+   "yellow exclamation",
+   "driver",
+   "blocked driver"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Device Manager Code 52: Windows cannot verify the digital signature for the drivers required for this device",
+  "cmd": "devmgmt.msc",
+  "desc": "Install a signed driver from the manufacturer. Check Secure Boot. Advanced startup > Disable driver signature enforcement (temporary).",
+  "tags": [
+   "code 52",
+   "device manager",
+   "yellow exclamation",
+   "driver",
+   "digital signature",
+   "unsigned driver",
+   "driver signature"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Find the right driver for an 'Unknown device'",
+  "cmd": "pnputil /enum-devices /problem",
+  "desc": "Device Manager > Unknown device > Properties > Details > Hardware Ids. Search 'VEN_xxxx&DEV_xxxx' to find the manufacturer, then download the driver from their site (or Windows Update > Optional updates).",
+  "tags": [
+   "unknown device",
+   "hardware id",
+   "ven dev",
+   "missing driver",
+   "base system device",
+   "pci device"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Roll back / remove a bad driver",
+  "cmd": "pnputil /enum-drivers",
+  "desc": "Device Manager > device > Properties > Driver > Roll Back Driver. Or delete a specific driver package:\n  pnputil /delete-driver oem12.inf /uninstall /force",
+  "tags": [
+   "roll back driver",
+   "remove driver",
+   "bad driver",
+   "pnputil"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Export / backup all drivers (before reinstalling Windows)",
+  "cmd": "mkdir C:\\DriversBackup\ndism /online /export-driver /destination:C:\\DriversBackup",
+  "desc": "Saves all third-party drivers. After reinstalling Windows restore with:\n  pnputil /add-driver C:\\DriversBackup\\*.inf /subdirs /install",
+  "tags": [
+   "backup drivers",
+   "export drivers",
+   "restore drivers",
+   "reinstall windows"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "No Wi-Fi option / Wi-Fi adapter missing",
+  "cmd": "netsh wlan show drivers",
+  "desc": "1. Check Airplane mode and the laptop's Wi-Fi key (Fn+F2 etc.).\n2. Device Manager > Network adapters - if missing, View > Show hidden devices, or install the Wi-Fi driver from the laptop maker.\n3. Run the full network reset.\n4. Settings > Network > Advanced > Network reset.",
+  "tags": [
+   "no wifi",
+   "wifi missing",
+   "wifi adapter missing",
+   "wireless disappeared",
+   "wlan"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "'No audio output device is installed'",
+  "cmd": "net stop audiosrv & net start audiosrv",
+  "desc": "Device Manager > Sound, video and game controllers: uninstall the audio device (tick delete driver), restart. Install Realtek/Intel SST audio drivers from the PC maker. Check BIOS that onboard audio is enabled.",
+  "tags": [
+   "no audio output device is installed",
+   "no sound device",
+   "realtek",
+   "intel sst"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Microphone not working",
+  "cmd": "start ms-settings:privacy-microphone",
+  "desc": "Allow microphone access for apps (Settings > Privacy > Microphone), pick the right input device (mmsys.cpl > Recording), check volume/mute, update the audio driver.",
+  "tags": [
+   "microphone",
+   "mic not working",
+   "recording",
+   "privacy microphone"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Camera not working (0xA00F4244 / 0xA00F4271 / NoCamerasAreAttached)",
+  "cmd": "start ms-settings:privacy-webcam",
+  "desc": "Allow camera access, check the privacy shutter / F-key on the laptop, close other apps using the camera, reinstall the camera driver in Device Manager (Cameras / Imaging devices).",
+  "tags": [
+   "camera",
+   "webcam",
+   "0xa00f4244",
+   "0xa00f4271",
+   "nocamerasareattached",
+   "we can't find your camera"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Printer error 0x0000011b / 0x00000709 / 0x0000007c",
+  "cmd": "net stop spooler & net start spooler",
+  "desc": "0x11b: network printer security change - update both PCs, or connect the printer by IP (Add printer > TCP/IP). 0x709: can't set default printer - Settings > Printers > turn OFF 'Let Windows manage my default printer'. Restart the spooler.",
+  "tags": [
+   "printer error",
+   "0x0000011b",
+   "0x00000709",
+   "0x0000007c",
+   "operation could not be completed",
+   "shared printer"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Touchpad not working (laptop)",
+  "cmd": "start ms-settings:devices-touchpad",
+  "desc": "Check the touchpad toggle key (Fn+F...), Settings > Touchpad is ON, uninstall 'HID-compliant touch pad' / I2C HID device in Device Manager and restart, install the touchpad driver (Synaptics/ELAN/Precision) from the laptop maker.",
+  "tags": [
+   "touchpad",
+   "trackpad",
+   "mouse pad",
+   "laptop touchpad not working"
+  ]
+ },
+ {
+  "cat": "Drivers & Device Errors",
+  "title": "Second monitor not detected",
+  "cmd": "",
+  "desc": "Win+P > Extend. Settings > Display > Detect. Check cable/input source on the monitor, try another cable/port, update the GPU driver. Win+Ctrl+Shift+B restarts the graphics driver.",
+  "tags": [
+   "second monitor",
+   "external monitor",
+   "hdmi not working",
+   "display not detected",
+   "no signal"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'User Profile Service failed the sign-in' / logged in with a temporary profile",
+  "cmd": "",
+  "desc": "The profile is corrupted. Restart once. If it stays: log in with another admin account (or Safe Mode), open regedit > HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProfileList, find your SID - if there are two (one ending .bak), fix the ProfileImagePath/State values or create a new user and copy your files from C:\\Users\\<old>.",
+  "tags": [
+   "user profile service failed",
+   "temporary profile",
+   "can't sign in",
+   "profile corrupted",
+   "temp profile"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'Something happened and your PIN isn't available'",
+  "cmd": "",
+  "desc": "On the login screen choose 'Sign-in options' > password. Then Settings > Accounts > Sign-in options > PIN > Remove and set it up again. If needed, delete C:\\Windows\\ServiceProfiles\\LocalService\\AppData\\Local\\Microsoft\\Ngc (take ownership first).",
+  "tags": [
+   "pin isn't available",
+   "windows hello",
+   "pin not working",
+   "ngc",
+   "sign-in"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'The RPC server is unavailable' (0x800706BA)",
+  "cmd": "sc query RpcSs",
+  "desc": "Make sure 'Remote Procedure Call (RPC)' and 'DCOM Server Process Launcher' services are running, and the firewall allows it (for remote PCs). Restart the PC.",
+  "tags": [
+   "rpc server is unavailable",
+   "0x800706ba",
+   "rpc",
+   "1722"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'Class not registered' (0x80040154)",
+  "cmd": "sfc /scannow",
+  "desc": "A COM component is missing. Re-register Store apps (see Windows Repair), reinstall the program, or for Explorer/Photos: set default apps again and run sfc + DISM.",
+  "tags": [
+   "class not registered",
+   "0x80040154",
+   "explorer.exe class not registered"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'Unspecified error' (0x80004005)",
+  "cmd": "",
+  "desc": "Generic error. Depends where it appears:\n- Extracting zip: use 7-Zip.\n- Windows Update: reset Windows Update.\n- Network share: enable SMB/Network discovery.\n- VirtualBox: reinstall VirtualBox / disable Hyper-V.\nRun sfc + DISM as a general fix.",
+  "tags": [
+   "0x80004005",
+   "unspecified error",
+   "e_fail"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'The parameter is incorrect' (0x80070057)",
+  "cmd": "chkdsk <drive>: /f",
+  "desc": "Often a drive file-system problem (on USB/external disk): run chkdsk on that drive. For backups/updates, check date/region settings and run sfc + DISM.",
+  "tags": [
+   "parameter is incorrect",
+   "0x80070057",
+   "error 87",
+   "drive not accessible"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'Data error (cyclic redundancy check)' (0x80070017)",
+  "cmd": "chkdsk <drive>: /f /r",
+  "desc": "The disk/CD/USB has bad sectors or the copy source is damaged. Run chkdsk /r on the drive, check disk health, copy files with robocopy (skips bad files with /r:0 /w:0), and back up quickly if it's a hard disk.",
+  "tags": [
+   "cyclic redundancy check",
+   "crc",
+   "0x80070017",
+   "data error",
+   "bad sector"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'Location is not available' / 'Drive is not accessible'",
+  "cmd": "chkdsk <drive>: /f",
+  "desc": "Run chkdsk on the drive. If 'Access is denied': take ownership (takeown/icacls). If the drive shows as RAW, recover data with TestDisk before formatting.",
+  "tags": [
+   "location is not available",
+   "drive is not accessible",
+   "is not accessible",
+   "access is denied drive"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'There is a problem with this drive. Scan the drive now and fix it'",
+  "cmd": "chkdsk <drive>: /f",
+  "desc": "Usually caused by removing a USB without 'Eject'. Run chkdsk /f on it. Always eject drives safely.",
+  "tags": [
+   "problem with this drive",
+   "scan and fix",
+   "usb error",
+   "eject"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'Not enough memory resources are available to process this command' / 'Insufficient system resources'",
+  "cmd": "",
+  "desc": "Close programs, restart. If it persists: increase virtual memory (sysdm.cpl > Advanced > Performance > Settings > Advanced > Virtual memory > System managed), check RAM usage in Task Manager, scan for malware.",
+  "tags": [
+   "not enough memory resources",
+   "insufficient system resources",
+   "out of memory",
+   "low memory",
+   "virtual memory",
+   "pagefile"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'Your computer is low on memory'",
+  "cmd": "",
+  "desc": "Close heavy apps (Chrome tabs!), set Virtual memory to 'System managed' (sysdm.cpl), make sure C: has free space for the pagefile, and consider adding RAM.",
+  "tags": [
+   "low on memory",
+   "out of memory",
+   "ram full",
+   "pagefile",
+   "virtual memory"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'Critical error - Your Start menu isn't working'",
+  "cmd": "taskkill /f /im explorer.exe & start explorer.exe",
+  "desc": "Restart Explorer, then run DISM + sfc and re-register Store apps (see Windows Repair). Create a new user if only one account is affected.",
+  "tags": [
+   "critical error start menu isn't working",
+   "start menu broken"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'Windows cannot find xxx. Make sure you typed the name correctly'",
+  "cmd": "",
+  "desc": "The shortcut/file association points to a missing file, or antivirus deleted it. Reinstall the program, check the shortcut target, check antivirus quarantine. For 'Windows cannot find C:\\Program Files...' check Image File Execution Options in registry for malware leftovers.",
+  "tags": [
+   "windows cannot find",
+   "make sure you typed the name correctly",
+   "shortcut broken"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'There is no app associated with this file' / 'How do you want to open this file?'",
+  "cmd": "assoc .<ext>",
+  "desc": "Install a program that opens that file type, or Settings > Apps > Default apps to set it. assoc/ftype show associations.",
+  "example": "assoc .pdf\nftype",
+  "tags": [
+   "no app associated",
+   "file association",
+   "how do you want to open this file",
+   "default app"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'You'll need a new app to open this ms-xxx link'",
+  "cmd": "",
+  "desc": "A built-in app is missing/broken (e.g. ms-windows-store, ms-settings). Re-register Store apps and run wsreset. For ms-gamingoverlay: turn off Game Bar or install Xbox Game Bar.",
+  "tags": [
+   "you'll need a new app to open this",
+   "ms-gamingoverlay",
+   "ms-windows-store",
+   "link"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "Activation error 0xC004F074 / 0xC004C003 / 0xC004F213 / 0x803F7001",
+  "cmd": "slmgr /dlv",
+  "desc": "0xC004F074 = KMS server unreachable (work licenses). 0xC004C003 / 0xC004F213 / 0x803F7001 = no valid license for this hardware (e.g. after motherboard change) - sign in with the Microsoft account linked to the license and use Settings > Activation > Troubleshoot > 'I changed hardware'. Or enter a valid key with slmgr /ipk.",
+  "tags": [
+   "activation",
+   "0xc004f074",
+   "0xc004c003",
+   "0xc004f213",
+   "0x803f7001",
+   "0xc004f050",
+   "not activated",
+   "product key"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "Windows time / clock wrong causes 'Your connection is not private' (NET::ERR_CERT_DATE_INVALID)",
+  "cmd": "w32tm /resync",
+  "desc": "Browsers reject certificates when the PC clock is wrong. Fix time zone & time: Settings > Time & language > Set automatically. Run w32tm /resync (admin). Dead CMOS battery if it resets after shutdown.",
+  "tags": [
+   "your connection is not private",
+   "err_cert_date_invalid",
+   "certificate error",
+   "clock wrong",
+   "ssl"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'ERR_CONNECTION_TIMED_OUT' / 'ERR_CONNECTION_REFUSED' / 'This site can't be reached'",
+  "cmd": "ipconfig /flushdns\nnetsh winsock reset",
+  "desc": "Check the site works on another device. Then: flush DNS, change DNS to 8.8.8.8, disable proxy (inetcpl.cpl > Connections > LAN settings), disable VPN/antivirus web shield, check hosts file, reset browser.",
+  "tags": [
+   "err_connection_timed_out",
+   "err_connection_refused",
+   "site can't be reached",
+   "err_connection_reset",
+   "err_network_changed"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'Default gateway is not available'",
+  "cmd": "netsh winsock reset\nnetsh int ip reset",
+  "desc": "Usually a network driver power issue. Update the network driver, disable 'Allow the computer to turn off this device to save power' (Device Manager > adapter > Power Management), and run the network reset.",
+  "tags": [
+   "default gateway is not available",
+   "gateway",
+   "wifi drops"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'Ethernet/Wi-Fi doesn't have a valid IP configuration'",
+  "cmd": "ipconfig /release\nipconfig /renew\nnetsh winsock reset\nnetsh int ip reset",
+  "desc": "Restart router, run the commands as admin, make sure IP is set to automatic (ncpa.cpl > adapter > IPv4 > Obtain automatically), update the driver.",
+  "tags": [
+   "doesn't have a valid ip configuration",
+   "valid ip",
+   "ethernet",
+   "unidentified network"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'Windows could not automatically detect this network's proxy settings'",
+  "cmd": "netsh winhttp reset proxy\nnetsh winsock reset",
+  "desc": "Turn off proxy: Settings > Network > Proxy > turn off 'Use a proxy server', then run the commands and restart.",
+  "tags": [
+   "proxy settings",
+   "could not automatically detect",
+   "proxy",
+   "winhttp"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "'Can't connect to this network' (Wi-Fi)",
+  "cmd": "netsh wlan delete profile name=\"<WiFi name>\"",
+  "desc": "Forget the network and reconnect with the password, restart the router, update the Wi-Fi driver, and run the network reset.",
+  "tags": [
+   "can't connect to this network",
+   "wifi can't connect",
+   "wrong password"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "Blue screen DPC_WATCHDOG_VIOLATION (0x133)",
+  "cmd": "",
+  "desc": "Usually storage (SSD/SATA AHCI) driver or firmware. Update SSD firmware and the 'Standard SATA AHCI Controller' driver, chipset drivers, and BIOS. Remove recently added hardware.",
+  "tags": [
+   "dpc_watchdog_violation",
+   "0x133",
+   "0x00000133",
+   "bsod",
+   "ssd"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "Blue screen WHEA_UNCORRECTABLE_ERROR (0x124)",
+  "cmd": "",
+  "desc": "Hardware error: remove any CPU/RAM/GPU overclock or XMP, check temperatures, update BIOS, test RAM, check PSU. Repeated 0x124 = likely failing hardware.",
+  "tags": [
+   "whea_uncorrectable_error",
+   "0x124",
+   "0x00000124",
+   "hardware error",
+   "bsod",
+   "overclock"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "Blue screen KERNEL_SECURITY_CHECK_FAILURE (0x139) / SYSTEM_THREAD_EXCEPTION_NOT_HANDLED (0x7E)",
+  "cmd": "sfc /scannow",
+  "desc": "Usually an incompatible driver (often after an update). Boot Safe Mode, update/roll back recent drivers (GPU, network, antivirus), run sfc/DISM, test RAM.",
+  "tags": [
+   "kernel_security_check_failure",
+   "0x139",
+   "system_thread_exception_not_handled",
+   "0x7e",
+   "0x1000007e",
+   "bsod"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "Blue screen KMODE_EXCEPTION_NOT_HANDLED (0x1E) / PAGE_FAULT_IN_NONPAGED_AREA (0x50)",
+  "cmd": "mdsched",
+  "desc": "Driver or RAM. Note the .sys file shown, update/roll back that driver, test RAM with mdsched, run sfc/DISM.",
+  "tags": [
+   "kmode_exception_not_handled",
+   "0x1e",
+   "page_fault_in_nonpaged_area",
+   "0x50",
+   "bsod",
+   "ram"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "Blue screen DRIVER_POWER_STATE_FAILURE (0x9F)",
+  "cmd": "powercfg /h off",
+  "desc": "A driver failed while going to sleep. Update GPU/Wi-Fi/chipset drivers, disable Fast Startup (powercfg /h off), set PCI Express Link State Power Management to Off in power options.",
+  "tags": [
+   "driver_power_state_failure",
+   "0x9f",
+   "sleep crash",
+   "bsod"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "Blue screen UNEXPECTED_STORE_EXCEPTION (0x154) / NTFS_FILE_SYSTEM (0x24) / KERNEL_DATA_INPAGE_ERROR (0x7A)",
+  "cmd": "chkdsk C: /f /r",
+  "desc": "Disk problems. Check disk health (wmic diskdrive get status / CrystalDiskInfo), run chkdsk, update SSD firmware, check cables. Back up your data now.",
+  "tags": [
+   "unexpected_store_exception",
+   "0x154",
+   "ntfs_file_system",
+   "0x24",
+   "kernel_data_inpage_error",
+   "0x7a",
+   "bsod",
+   "disk"
+  ],
+  "admin": true
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "Blue screen CLOCK_WATCHDOG_TIMEOUT (0x101)",
+  "cmd": "",
+  "desc": "CPU not responding: remove overclock, update BIOS and chipset drivers, check CPU temperature and cooler.",
+  "tags": [
+   "clock_watchdog_timeout",
+   "0x101",
+   "bsod",
+   "cpu"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "Blue screen BAD_POOL_CALLER (0xC2) / BAD_POOL_HEADER (0x19)",
+  "cmd": "",
+  "desc": "Faulty driver (often antivirus, VPN or network). Uninstall third-party antivirus/VPN, update drivers, test RAM.",
+  "tags": [
+   "bad_pool_caller",
+   "0xc2",
+   "bad_pool_header",
+   "0x19",
+   "bsod"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "Read crash dumps / see what caused the last blue screen",
+  "cmd": "dir /od C:\\Windows\\Minidump",
+  "desc": "Install WinDbg (winget install Microsoft.WinDbg), open the newest .dmp in C:\\Windows\\Minidump and run  !analyze -v . The 'MODULE_NAME' / 'IMAGE_NAME' is usually the guilty driver. Or use NirSoft BlueScreenView.",
+  "example": "winget install Microsoft.WinDbg",
+  "tags": [
+   "minidump",
+   "dump file",
+   "analyze crash",
+   "windbg",
+   "bluescreenview",
+   "bsod cause"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "Find errors in Event Viewer from CMD",
+  "cmd": "wevtutil qe System /c:30 /rd:true /f:text /q:\"*[System[(Level=1 or Level=2)]]\"",
+  "desc": "Shows the 30 most recent critical/error events in the System log. Replace System with Application for app crashes.",
+  "example": "wevtutil qe Application /c:20 /rd:true /f:text /q:\"*[System[(Level=2)]]\"\nwevtutil qe System /c:5 /rd:true /f:text /q:\"*[System[(EventID=41)]]\"   :: unexpected shutdowns",
+  "tags": [
+   "event log",
+   "errors",
+   "event viewer",
+   "wevtutil",
+   "event id 41",
+   "kernel-power",
+   "crash log"
+  ]
+ },
+ {
+  "cat": "System & Login Errors",
+  "title": "PC restarts / turns off by itself (Kernel-Power 41)",
+  "cmd": "wevtutil qe System /c:5 /rd:true /f:text /q:\"*[System[(EventID=41 or EventID=6008)]]\"",
+  "desc": "Event 41 = PC lost power without shutting down. Causes: overheating, weak/failing power supply, unstable overclock, BSOD with auto-restart. Disable auto-restart to see the blue screen: sysdm.cpl > Advanced > Startup and Recovery > uncheck 'Automatically restart'.",
+  "tags": [
+   "restarts by itself",
+   "turns off by itself",
+   "kernel-power 41",
+   "random restart",
+   "shutdown suddenly",
+   "overheating"
+  ]
  }
 ]

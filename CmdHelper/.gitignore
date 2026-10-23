@@ -4,3 +4,4 @@ dist/
 __pycache__/
 my_commands.json
 favorites.json
+settings.json
