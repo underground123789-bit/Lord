@@ -52,6 +52,12 @@ Shortcuts: `Ctrl+F` focus search · `Enter`/`↓` jump to results · `Esc` clear
 
 ## Get the .exe
 
+**Ready-made:** download [`release/CMD-Helper.exe`](release/CMD-Helper.exe) (64-bit Windows 10/11,
+~20 MB, no install). Put it in any folder or on a USB stick and double-click it.
+Its SHA-256 is in `release/CMD-Helper.exe.sha256`.
+
+To build it yourself instead:
+
 **Option 1 — GitHub (no Python needed):** every push that changes `CmdHelper/`
 builds the exe on a Windows machine. Open the repo's **Actions** tab →
 *Build CMD Helper (Windows)* → latest run → download **CMD-Helper-portable**

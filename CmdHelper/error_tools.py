@@ -42,6 +42,20 @@ BUGCHECKS = {
     0x1C7: "STORE_DATA_STRUCTURE_CORRUPTION",
 }
 
+# Common crash codes (NTSTATUS), in case Windows has no text for them.
+NTSTATUS = {
+    0xC0000005: "Access violation - the program read or wrote memory it shouldn't",
+    0xC0000017: "Not enough memory",
+    0xC0000022: "Access denied",
+    0xC000007B: "Invalid image format - usually a 32/64-bit DLL mismatch",
+    0xC00000FD: "Stack overflow",
+    0xC000012F: "Bad image - the file is not a valid Windows program or is damaged",
+    0xC0000135: "A required DLL was not found (often .NET Framework)",
+    0xC0000142: "A DLL failed to initialize",
+    0xC0000409: "Stack buffer overrun - the program detected a crash and closed",
+    0xC0000428: "Invalid image hash / digital signature",
+}
+
 # Words that carry no meaning when someone pastes a whole error message.
 STOPWORDS = set("""
 a an the and or of to in on at for from by with is are was were be been it this that these those
@@ -127,14 +141,16 @@ def _format_message(code, module=None):
 def explain_code(code):
     """Human explanation of a hex code string like '0x80070643'. May return None."""
     n = int(code, 16)
-    parts = []
     if n in BUGCHECKS:
-        parts.append(f"Blue screen stop code {BUGCHECKS[n]}")
+        return f"Blue screen stop code {BUGCHECKS[n]}"
+    parts = []
     msg = _format_message(n)
     if not msg and n & 0xFFFF0000 == 0x80070000:  # HRESULT wrapping a Win32 error
         msg = _format_message(n & 0xFFFF)
     if not msg and n & 0xF0000000 == 0xC0000000:  # NTSTATUS
         msg = _format_message(n, "ntdll.dll")
+    if not msg:
+        msg = NTSTATUS.get(n)
     if not msg and n & 0xFFFF0000 == 0x80240000:
         msg = _format_message(n, "wuaueng.dll") or "Windows Update agent error"
     if msg:
